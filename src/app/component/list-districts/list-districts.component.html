@@ -1,0 +1,190 @@
+
+<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+<!-- <div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>district_Name</th>
+                <th>district_ID</th>
+                <th>dbStart_Name_En</th>
+                <th>Backward_NonBackward</th>
+                <th>Div_Id</th>
+                <th>password</th>
+                <th>DtDist</th>
+                <th>Dist2012</th>
+                <th>NewDistYear</th>
+                <th>Urban</th>
+                <th>DP_DistrictID</th>
+                <th>CreatedOn</th> -->
+
+                <!-- <th>is Completed</th> -->
+                <!-- <th>Update</th> -->
+                <!-- <th>elete</th> -->
+
+
+<!--     
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dist of districts">
+                <td>{{dist.District_Name}}</td>
+                <td>{{dist.District_ID}}</td>
+                <td>{{dist.DBStart_Name_En}}</td>
+                <td>{{dist.Backward_NonBackward}}</td>
+                <td>{{dist.Div_Id}}</td>
+                <td>{{dist.password}}</td>
+                <td>{{dist.DtDist}}</td>
+                <td>{{dist.Dist2012}}</td>
+                <td>{{dist.NewDistYear}}</td>
+                <td>{{dist.Urban}}</td>
+                <td>{{dist.DP_DistrictID}}</td>
+                <td>{{dist.CreatedOn}}</td> -->
+                <!-- <td>{{todo.done}}</td> -->
+                <!-- <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td> -->
+                <!-- <td><button class="btn btn-danger" (click)="deleteTodo(todo.id)">delete</button></td> -->
+    
+    
+            <!-- </tr>
+        </tbody>
+    </table>
+    <div class="row"> -->
+        <!-- <button (click)="addTodo()" class="btn btn-success">Add</button> -->
+    <!-- </div>
+</div> -->
+
+
+
+<!-- <h1>Districts</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>District Name</th>
+        <th>District ID</th>
+        <th>DB Start Name (English)</th>
+        <th>Backward/Non-Backward</th>
+        <th>Division ID</th>
+        <th>password</th>
+        <th>DtDist</th>
+        <th>Dist2012</th>
+        <th>NewDistYear</th>
+        <th>Urban</th>
+        <th>DP_DistrictID</th>
+        <th>Created On</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dts of districts">
+        <td>{{ dts.district_Name }}</td>
+        <td>{{ dts.district_ID }}</td>
+        <td>{{ dts.dbStart_Name_En }}</td>
+        <td>{{ dts.backward_NonBackward }}</td>
+        <td>{{ dts.div_Id}}</td>
+        <td>{{ dts.password }}</td>
+        <td>{{dts.dtDist}}</td>
+        <td>{{dts.dist2012}}</td>
+        <td>{{dts.newDistYear}}</td>
+        <td>{{dts.urban}}</td>
+        <td>{{dts.dP_DistrictID}}</td>
+
+        <td>{{ dts.createdOn | date }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+    <!-- <h3  class="alert alert-secondary text-center mb-0" style="line-height: 0; font-weight: 500;">
+        </h3> -->
+<div class="mt-0" style="background-color: #caeeff;">
+    <div class="container" style="background-color :#e2e3e5">
+    <h3 > Chhattisgarh Medical Services Corporation Ltd.</h3>
+
+    </div>
+    <h1>Districts</h1>
+    <!-- <div fxLayout fxLayoutAlign="center center">
+        <mat-form-field fxFlex="40%">
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div> -->
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    <table mat-table [dataSource]="districts" matSort class="mat-elevation-z8">
+
+        <!-- District Name Column -->
+        <ng-container matColumnDef="district_Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> District Name </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.district_Name}} </td>
+        </ng-container>
+
+        <!-- District ID Column -->
+        <ng-container matColumnDef="district_ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> District ID </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.district_ID}} </td>
+        </ng-container>
+
+        <!-- DB Start Name Column -->
+        <ng-container matColumnDef="dbStart_Name_En">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DB Start Name (English) </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.dbStart_Name_En}} </td>
+        </ng-container>
+
+        <!-- Backward/Non-Backward Column -->
+        <ng-container matColumnDef="backward_NonBackward">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Backward/Non-Backward </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.backward_NonBackward}} </td>
+        </ng-container>
+
+        <!-- Division ID Column -->
+        <ng-container matColumnDef="div_Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Division ID </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.div_Id}} </td>
+        </ng-container>
+
+        <!-- Password Column -->
+        <ng-container matColumnDef="password">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Password </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.password}} </td>
+        </ng-container>
+
+        <!-- DtDist Column -->
+        <ng-container matColumnDef="dtDist">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DtDist </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.dtDist}} </td>
+        </ng-container>
+
+        <!-- Dist2012 Column -->
+        <ng-container matColumnDef="dist2012">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Dist2012 </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.dist2012}} </td>
+        </ng-container>
+
+        <!-- NewDistYear Column -->
+        <ng-container matColumnDef="newDistYear">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> NewDistYear </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.newDistYear}} </td>
+        </ng-container>
+
+        <!-- Urban Column -->
+        <ng-container matColumnDef="urban">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Urban </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.urban}} </td>
+        </ng-container>
+
+        <!-- DP_DistrictID Column -->
+        <ng-container matColumnDef="dP_DistrictID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DP_DistrictID </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.dP_DistrictID}} </td>
+        </ng-container>
+
+        <!-- Created On Column -->
+        <ng-container matColumnDef="createdOn">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created On </th>
+            <td mat-cell *matCellDef="let dts"> {{dts.createdOn | date}} </td>
+        </ng-container>
+
+        <!-- Header and Row Declarations -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>
