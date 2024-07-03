@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[RouteGuardService]},
   {path:'autocomplete',component:AutocompleteComponent,canActivate:[RouteGuardService]},
   {path:'input',component:InputComponent,canActivate:[RouteGuardService]},
-  {path:'card',component:CardComponent},
+  {path:'card',component:CardComponent,canActivate:[RouteGuardService]},
   {path:'slider',component:SliderComponent,canActivate:[RouteGuardService]},
   {path:'table',component:TableComponent,canActivate:[RouteGuardService]},
   {path:'form',component:FormdesignComponent,canActivate:[RouteGuardService]},
