@@ -1,10 +1,51 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="line-scale-party" [fullScreen]="true">
-  <p style="color: white "> Please wait... </p>
+  <p style="color: white"> Please wait... </p>
 </ngx-spinner>
-    <app-menubar></app-menubar>
 
-<!-- <app-footer></app-footer> -->
- 
+<ng-container *ngIf="!isLoginPage">
+  <mat-toolbar color="primary" class="mat-elevation-z8">
+    <button (click)="drawer.toggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="toolbar-title">CGMSC DASHBOARD</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button (click)="logout()" class="logout-button">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer opened="true" mode="side" position="start">
+      <mat-nav-list>
+        <mat-list-item>
+          <button routerLink="card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button routerLink="home" mat-button><mat-icon>home</mat-icon> Home</button>
+        </mat-list-item>
+        <!-- Add other menu items here -->
+          <mat-list-item>
+            <button routerLink="Rcdetail" mat-button><mat-icon>format_list_bulleted</mat-icon> RCDetail</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="complaints" mat-button><mat-icon>format_list_bulleted</mat-icon> Complaint</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="dispatchPending" mat-button><mat-icon>format_list_bulleted</mat-icon> Pending</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="dhs" mat-button><mat-icon>format_list_bulleted</mat-icon> Orders</button>
+        </mat-list-item> 
 
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div style="text-align: center;min-height: 600px;">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</ng-container>
 
-
+<ng-container *ngIf="isLoginPage">
+  <router-outlet></router-outlet>
+</ng-container>

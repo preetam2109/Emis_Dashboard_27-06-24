@@ -51,24 +51,24 @@ export class ComplaintsComponent implements OnInit {
   displayedColumns: string[] = [
     'district', 'location_name', 'item_name',
     'serial_no', 'warrantyValidTill', 'complaint_date', 'complaint_details', 'name',
-    'email_id', 'mobile_no', 'location_id', 'supplier_id', 'complaints_trouble_id', 'not_function_date',
+     'mobile_no',
   ];
 
   columnNames: { [key: string]: string } = {
     'district': 'District',
-    'location_name': 'Location Name',
-    'item_name': 'Equipment Name',
-    'serial_no': 'Serial No',
-    'warrantyValidTill': 'Warranty Up To',
+    'location_name': 'Location',
+    'item_name': 'Equipment',
+    'serial_no': 'Serial',
+    'warrantyValidTill': 'Warranty',
     'complaint_date': 'Complaint Date',
     'complaint_details': 'Complaint Details',
     'name': 'Supplier',
-    'email_id': 'Email ID',
-    'mobile_no': 'Mobile No',
-    'location_id': 'Location ID',
-    'supplier_id': 'Supplier ID',
-    'complaints_trouble_id': 'Complaints Trouble ID',
-    'not_function_date': 'Not Function Date'
+    'mobile_no': 'Mobile No'
+    // 'email_id': 'Email ID',
+    // 'location_id': 'Location ID',
+    // 'supplier_id': 'Supplier ID',
+    // 'complaints_trouble_id': 'Complaints Trouble ID',
+    // 'not_function_date': 'Not Function Date'
   };
 
   dataSource: MatTableDataSource<Complaints>;
@@ -153,15 +153,15 @@ export class ComplaintsComponent implements OnInit {
       if (result.matches) {
         if (this.breakpointObserver.isMatched(Breakpoints.Handset)) {
           this.displayedColumns = ['district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
-            'complaint_date', 'complaint_details', 'name', 'email_id', 'mobile_no',
-            'location_id', 'supplier_id', 'complaints_trouble_id', 'not_function_date'];
+            'complaint_date', 'complaint_details', 'name',  'mobile_no',
+            ];
         } else if (this.breakpointObserver.isMatched(Breakpoints.Tablet)) {
           this.displayedColumns = ['district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill', 'complaint_date'];
         } else {
           this.displayedColumns = [
             'district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
-            'complaint_date', 'complaint_details', 'name', 'email_id', 'mobile_no',
-            'location_id', 'supplier_id', 'complaints_trouble_id', 'not_function_date'
+            'complaint_date', 'complaint_details', 'name', 'mobile_no',
+            
           ];
         }
       }

@@ -36,6 +36,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { DHSComponent } from './component/dhs/dhs.component';
 import { DispatchPendingOneComponent } from './component/dispatch-pending-one/dispatch-pending-one.component';
 import { DatePipe } from '@angular/common';
+import { LoginComponent } from './component/auth/login/login.component';
+import { LogoutComponent } from './component/auth/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { DatePipe } from '@angular/common';
     ReceiptPendingComponent,
     InstallationPendingComponent,
     DHSComponent,
-    DispatchPendingOneComponent
+    DispatchPendingOneComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     DatePipe,

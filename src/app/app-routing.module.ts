@@ -17,27 +17,32 @@ import { ReceiptPendingComponent } from './component/receipt-pending/receipt-pen
 import { InstallationPendingComponent } from './component/installation-pending/installation-pending.component';
 import { DHSComponent } from './component/dhs/dhs.component';
 import { DispatchPendingOneComponent } from './component/dispatch-pending-one/dispatch-pending-one.component';
+import { LoginComponent } from './component/auth/login/login.component';
+import { LogoutComponent } from './component/auth/logout/logout.component';
+import { RouteGuardService } from './service/authentication/route-guard.service';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
-  {path:'autocomplete',component:AutocompleteComponent},
-  {path:'input',component:InputComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full' },
+  {path:'login',component:LoginComponent},
+  // { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  {path:'logout',component:LogoutComponent,canActivate:[RouteGuardService]},
+  {path:'home',component:HomeComponent,canActivate:[RouteGuardService]},
+  {path:'autocomplete',component:AutocompleteComponent,canActivate:[RouteGuardService]},
+  {path:'input',component:InputComponent,canActivate:[RouteGuardService]},
   {path:'card',component:CardComponent},
-  {path:'slider',component:SliderComponent},
-  {path:'table',component:TableComponent},
-  {path:'form',component:FormdesignComponent},
-  {path:'associate',component:AssociateComponent},
-  {path:'districts',component:ListDistrictsComponent},
-  {path:'Rcdetail',component:RCDetailReportComponent},
-  {path:'complaints',component:ComplaintsComponent},
-  {path:'apex',component:ApexChartComponent},
-  {path:'dispatchPending',component:DispatchPendingComponent},
-  {path:'receiptPending',component:ReceiptPendingComponent},
-  {path:'installationPending',component:InstallationPendingComponent},
-  {path:'dhs',component:DHSComponent},
-  {path:'dhs-one',component:DispatchPendingOneComponent}
-
-
+  {path:'slider',component:SliderComponent,canActivate:[RouteGuardService]},
+  {path:'table',component:TableComponent,canActivate:[RouteGuardService]},
+  {path:'form',component:FormdesignComponent,canActivate:[RouteGuardService]},
+  {path:'associate',component:AssociateComponent,canActivate:[RouteGuardService]},
+  {path:'districts',component:ListDistrictsComponent,canActivate:[RouteGuardService]},
+  {path:'Rcdetail',component:RCDetailReportComponent,canActivate:[RouteGuardService]},
+  {path:'complaints',component:ComplaintsComponent,canActivate:[RouteGuardService]},
+  {path:'apex',component:ApexChartComponent,canActivate:[RouteGuardService]},
+  {path:'dispatchPending',component:DispatchPendingComponent,canActivate:[RouteGuardService]},
+  {path:'receiptPending',component:ReceiptPendingComponent,canActivate:[RouteGuardService]},
+  {path:'installationPending',component:InstallationPendingComponent,canActivate:[RouteGuardService]},
+  {path:'dhs',component:DHSComponent,canActivate:[RouteGuardService]},
+  {path:'dhs-one',component:DispatchPendingOneComponent,canActivate:[RouteGuardService]}
 
 
   
