@@ -24,7 +24,6 @@ import { RouteGuardService } from './service/authentication/route-guard.service'
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
-  // { path: '**', redirectTo: 'login', pathMatch: 'full' },
   {path:'logout',component:LogoutComponent,canActivate:[RouteGuardService]},
   {path:'home',component:HomeComponent,canActivate:[RouteGuardService]},
   {path:'autocomplete',component:AutocompleteComponent,canActivate:[RouteGuardService]},
@@ -42,7 +41,8 @@ const routes: Routes = [
   {path:'receiptPending',component:ReceiptPendingComponent,canActivate:[RouteGuardService]},
   {path:'installationPending',component:InstallationPendingComponent,canActivate:[RouteGuardService]},
   {path:'dhs',component:DHSComponent,canActivate:[RouteGuardService]},
-  {path:'dhs-one',component:DispatchPendingOneComponent,canActivate:[RouteGuardService]}
+  {path:'dhs-one',component:DispatchPendingOneComponent,canActivate:[RouteGuardService]},
+  { path: '**', redirectTo: 'login' }
 
 
   
