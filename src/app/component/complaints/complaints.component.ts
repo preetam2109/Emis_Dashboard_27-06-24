@@ -51,7 +51,7 @@ export class ComplaintsComponent implements OnInit {
   displayedColumns: string[] = [
     'district', 'location_name', 'item_name',
     'serial_no', 'warrantyValidTill', 'complaint_date', 'complaint_details', 'name',
-     'mobile_no',
+    'mobile_no', 'solved_date'
   ];
 
   columnNames: { [key: string]: string } = {
@@ -63,21 +63,25 @@ export class ComplaintsComponent implements OnInit {
     'complaint_date': 'Complaint Date',
     'complaint_details': 'Complaint Details',
     'name': 'Supplier',
-    'mobile_no': 'Mobile No'
-    // 'email_id': 'Email ID',
-    // 'location_id': 'Location ID',
-    // 'supplier_id': 'Supplier ID',
-    // 'complaints_trouble_id': 'Complaints Trouble ID',
-    // 'not_function_date': 'Not Function Date'
+    'mobile_no': 'Mobile No',
+    'solved_date': 'Solved Date'
   };
 
   dataSource: MatTableDataSource<Complaints>;
   allComplaints: Complaints[] = [];
+  selectedSeries: string = 'Total';
+  selectedDistrictName: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public spinner: NgxSpinnerService, private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver, private route: Router, private rcapi: DistrictService) {
+  constructor(
+    public spinner: NgxSpinnerService,
+    private cdr: ChangeDetectorRef,
+    private breakpointObserver: BreakpointObserver,
+    private route: Router,
+    private rcapi: DistrictService
+  ) {
     this.chartOptions = {
       series: [],
       chart: {
@@ -88,16 +92,20 @@ export class ComplaintsComponent implements OnInit {
           dataPointSelection: (event: any, chartContext: any, config: any) => {
             const selectedDistrict = this.chartOptions.xaxis?.categories[config.dataPointIndex];
             const seriesName =
-             config.seriesIndex === 0 ? 'Total' : 
-            (config.seriesIndex === 1 ? 'Solved' : 'Unsolved');
+              config.seriesIndex === 0 ? 'Total' :
+              (config.seriesIndex === 1 ? 'Solved' : 'Unsolved');
+
+            this.selectedSeries = seriesName;
 
             if (seriesName === 'Solved') {
               this.filterSolvedByDistrictWithSpinner(selectedDistrict);
             } else if (seriesName === 'Unsolved') {
               this.filterByDistrictWithSpinner(selectedDistrict);
-            } else {
-              
+            } else if (seriesName === 'Total') {
+              this.filterTotalByDistrictWithSpinner(selectedDistrict);
             }
+
+            this.updateDisplayedColumns();
           }
         }
       },
@@ -153,15 +161,14 @@ export class ComplaintsComponent implements OnInit {
       if (result.matches) {
         if (this.breakpointObserver.isMatched(Breakpoints.Handset)) {
           this.displayedColumns = ['district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
-            'complaint_date', 'complaint_details', 'name',  'mobile_no',
-            ];
+            'complaint_date', 'complaint_details', 'name', 'mobile_no', 'solved_date'];
         } else if (this.breakpointObserver.isMatched(Breakpoints.Tablet)) {
-          this.displayedColumns = ['district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill', 'complaint_date'];
+          this.displayedColumns = ['district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
+            'complaint_date', 'complaint_details', 'name', 'mobile_no', 'solved_date'];
         } else {
           this.displayedColumns = [
             'district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
-            'complaint_date', 'complaint_details', 'name', 'mobile_no',
-            
+            'complaint_date', 'complaint_details', 'name', 'mobile_no', 'solved_date'
           ];
         }
       }
@@ -170,14 +177,13 @@ export class ComplaintsComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.getAllRC();
+    this.getAllComplaints();
     setTimeout(() => this.loadData(), 1000);
-    
   }
 
-  getAllRC() {
-    debugger
+  getAllComplaints() {
     this.spinner.show();
+    this.selectedDistrictName='ALL'
     this.rcapi.overAllComplaints().subscribe(res => {
       this.allComplaints = res;
       this.dataSource.data = res;
@@ -190,6 +196,7 @@ export class ComplaintsComponent implements OnInit {
 
   filterByDistrictWithSpinner(selectedDistrict: string) {
     this.spinner.show();
+    this.selectedDistrictName = `${selectedDistrict} (Unsolved)`;
     this.filterByDistrict(selectedDistrict);
   }
 
@@ -203,23 +210,16 @@ export class ComplaintsComponent implements OnInit {
     this.cdr.detectChanges();
     this.spinner.hide();
   }
-resetPaginator() {
-    if (this.paginator) {
-      this.paginator.firstPage();
-    }
-  }
 
   filterSolvedByDistrictWithSpinner(selectedDistrict: string) {
     this.spinner.show();
-    this.filterSolvedByDistrictWithSpinners(selectedDistrict)
+    this.selectedDistrictName = `${selectedDistrict} (Solved)`;
+    this.filterSolvedByDistrict(selectedDistrict);
   }
 
-
-  filterSolvedByDistrictWithSpinners(selectedDistrict: string) {
-    debugger
+  filterSolvedByDistrict(selectedDistrict: string) {
     this.spinner.show();
     this.rcapi.overAllComplaintsSolved(selectedDistrict).subscribe(res => {
-      debugger
       this.dataSource.data = res;
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
@@ -229,6 +229,23 @@ resetPaginator() {
     });
   }
 
+  filterTotalByDistrictWithSpinner(selectedDistrict: string) {
+    this.spinner.show();
+    this.selectedDistrictName = `${selectedDistrict}`;
+    this.filterTotalByDistrict(selectedDistrict);
+  }
+
+  filterTotalByDistrict(selectedDistrict: string) {
+    this.spinner.show();
+    this.rcapi.overAllComplaintsSolvedorUnsolved(selectedDistrict).subscribe(res => {
+      this.dataSource.data = res;
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+      this.cdr.detectChanges();
+      this.spinner.hide();
+    });
+  }
   applyTextFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -273,5 +290,26 @@ resetPaginator() {
       this.cdr.detectChanges();
       this.spinner.hide();
     });
+  }
+
+  updateDisplayedColumns() {
+    if (this.selectedSeries === 'Solved') {
+      this.displayedColumns = [
+        'district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
+        'complaint_date', 'complaint_details', 'name', 'mobile_no', 'solved_date'
+      ];
+    } else if (this.selectedSeries === 'Unsolved') {
+      this.displayedColumns = [
+        'district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
+        'complaint_date', 'complaint_details', 'name', 'mobile_no'
+      ];
+    } else {
+      this.displayedColumns = [
+        'district', 'location_name', 'item_name', 'serial_no', 'warrantyValidTill',
+        'complaint_date', 'complaint_details', 'name', 'mobile_no'
+      ];
+    }
+
+    this.cdr.detectChanges();
   }
 }

@@ -25,6 +25,8 @@ export class Complaints {
   complaint_id: number;
   complaint_no: string;
   item_id: number;
+  solved_date:string;
+  status: string;
 
   constructor(
       district: string,
@@ -52,7 +54,10 @@ export class Complaints {
       extensionId: number,
       complaint_id: number,
       complaint_no: string,
-      item_id: number
+      item_id: number,
+      solved_date:string,
+      status: string
+
   ) {
       this.district = district;
       this.location_name = location_name;
@@ -80,5 +85,8 @@ export class Complaints {
       this.complaint_id = complaint_id;
       this.complaint_no = complaint_no;
       this.item_id = item_id;
+      this.solved_date=solved_date;
+      this.status=status
+
   }
 }

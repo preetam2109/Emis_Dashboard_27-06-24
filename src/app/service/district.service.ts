@@ -42,6 +42,11 @@ export class DistrictService {
   debugger
   return this.http.get<Complaints[]>(` https://localhost:7190/getAllComplaintsSolved?district=${district}`)
  }
+ overAllComplaintsSolvedorUnsolved(district: string){
+  debugger
+  // https://localhost:7190/getTotalSolvedOrUnsolved?district=jashpur
+  return this.http.get<Complaints[]>(`https://localhost:7190/getTotalSolvedOrUnsolved?district=${district}`)
+ }
 
  districtWiseComplaints(){
   return this.http.get<DistrictWiseComplaints[]>(`https://localhost:7190/getDistrictWiseComplaints`)
