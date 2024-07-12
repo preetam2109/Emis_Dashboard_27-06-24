@@ -22,6 +22,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from 'src/app/service/api.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -80,7 +81,7 @@ export class ComplaintsComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private breakpointObserver: BreakpointObserver,
     private route: Router,
-    private rcapi: DistrictService
+    private rcapi: ApiService
   ) {
     this.chartOptions = {
       series: [],

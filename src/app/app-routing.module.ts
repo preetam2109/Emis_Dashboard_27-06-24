@@ -8,7 +8,6 @@ import { SliderComponent } from './component/slider/slider.component';
 import { TableComponent } from './component/table/table.component';
 import { FormdesignComponent } from './component/formdesign/formdesign.component';
 import { AssociateComponent } from './component/associate/associate.component';
-import { ListDistrictsComponent } from './component/list-districts/list-districts.component';
 import { RCDetailReportComponent } from './rcdetail-report/rcdetail-report.component';
 import { ComplaintsComponent } from './component/complaints/complaints.component';
 import { ApexChartComponent } from './component/apex-chart/apex-chart.component';
@@ -33,7 +32,6 @@ const routes: Routes = [
   {path:'table',component:TableComponent,canActivate:[RouteGuardService]},
   {path:'form',component:FormdesignComponent,canActivate:[RouteGuardService]},
   {path:'associate',component:AssociateComponent,canActivate:[RouteGuardService]},
-  {path:'districts',component:ListDistrictsComponent,canActivate:[RouteGuardService]},
   {path:'Rcdetail',component:RCDetailReportComponent,canActivate:[RouteGuardService]},
   {path:'complaints',component:ComplaintsComponent,canActivate:[RouteGuardService]},
   {path:'apex',component:ApexChartComponent,canActivate:[RouteGuardService]},

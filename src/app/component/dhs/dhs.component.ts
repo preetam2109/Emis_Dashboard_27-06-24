@@ -26,6 +26,7 @@ import { DHSDetailsItemWise } from 'src/app/Model/DHSDetailsItemWise';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DhsSummary } from 'src/app/Model/DhsSummary';
+import { ApiService } from 'src/app/service/api.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -91,7 +92,7 @@ export class DHSComponent {
 
   constructor(
     private spinner: NgxSpinnerService,
-    public api: DistrictService,
+    public api: ApiService,
     private http: HttpClient,
     private breakpointObserver: BreakpointObserver,
     private cdr: ChangeDetectorRef,
@@ -221,7 +222,7 @@ export class DHSComponent {
   }
 
   onDateRangeChange() {
-    // debugger
+    // 
     const startDate = this.dateRange.value.start;
     const endDate = this.dateRange.value.end;
   

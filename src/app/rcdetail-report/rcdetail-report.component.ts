@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TotalNoRc } from '../Model/Totalnorc';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from '../service/api.service';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class RCDetailReportComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private cdr: ChangeDetectorRef,public spinner: NgxSpinnerService,private route: Router, private rcapi: DistrictService) {
+  constructor(private cdr: ChangeDetectorRef,public spinner: NgxSpinnerService,private route: Router, private rcapi: ApiService) {
     this.dataSource = new MatTableDataSource<RcDetail>([]);
 
 
@@ -79,20 +80,5 @@ export class RCDetailReportComponent implements OnInit {
     }
   }
 
-//   rcDetail!:RcDetail[]
 
-//  constructor(private route:Router,private rcapi:DistrictService){
-
-//   }
-
-//   ngOnInit(){
-//     this.getAllRC()
-//   }
-
-//   getAllRC(){
-//     this.rcapi.retrieveAllRC().subscribe(res=>{
-//       this.rcDetail=res
-//       console.log(JSON.stringify(res))
-//     })
-//   }
 }

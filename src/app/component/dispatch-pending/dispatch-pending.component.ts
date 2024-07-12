@@ -22,6 +22,7 @@ import {
 import { dispatchPending } from 'src/app/Model/dispatchPending';
 import { DistrictService } from 'src/app/service/district.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from 'src/app/service/api.service';
 
 
 
@@ -91,7 +92,7 @@ export class DispatchPendingComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private api: DistrictService,
+    private api: ApiService,
     private http: HttpClient,
     private breakpointObserver: BreakpointObserver,
     private cdr: ChangeDetectorRef
@@ -228,7 +229,7 @@ export class DispatchPendingComponent implements OnInit {
   }
 
   ngOnInit(){
-    // debugger
+    // 
     // this.spinner.show();
     // this.getAllDispatchPending();
     // setTimeout(() => this.loadData(), 10000);
@@ -243,7 +244,7 @@ export class DispatchPendingComponent implements OnInit {
   }
 
   applyTextFilter(event: Event) {
-    // debugger;
+    // ;
     // const filterValue = (event.target as HTMLInputElement).value;
     // this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -327,7 +328,7 @@ export class DispatchPendingComponent implements OnInit {
   }
 
   selectedTabValue(event: any): void {
-    debugger
+    
     this.selectedTabIndex = event.index;
   }
 }

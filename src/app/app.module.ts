@@ -18,7 +18,6 @@ import { FormdesignComponent } from './component/formdesign/formdesign.component
 import { PopupComponent } from './component/popup/popup.component';
 import { AssociateComponent } from './component/associate/associate.component';
 import { UserdetailComponent } from './component/userdetail/userdetail.component';
-import { ListDistrictsComponent } from './component/list-districts/list-districts.component';
 import {MatTabsModule,MatTabGroup} from '@angular/material/tabs';
 import { FooterComponent } from './component/footer/footer.component';
 import { RCDetailReportComponent } from './rcdetail-report/rcdetail-report.component';
@@ -54,7 +53,6 @@ import { ToastrModule } from 'ngx-toastr';
     PopupComponent,
     AssociateComponent,
     UserdetailComponent,
-    ListDistrictsComponent,
     FooterComponent,
     RCDetailReportComponent,
     ComplaintsComponent,

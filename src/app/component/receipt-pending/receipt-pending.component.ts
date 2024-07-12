@@ -23,6 +23,7 @@ import { dispatchPending } from 'src/app/Model/dispatchPending';
 import { DistrictService } from 'src/app/service/district.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ReceiptPending } from 'src/app/Model/ReceiptPending';
+import { ApiService } from 'src/app/service/api.service';
 
 
 export type ChartOptions = {
@@ -79,7 +80,7 @@ dispatchPendings: ReceiptPending[]=[]
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatSort) sort!: MatSort;
 
-constructor(private spinner: NgxSpinnerService,private api: DistrictService, private http: HttpClient,private breakpointObserver:BreakpointObserver,private cdr:ChangeDetectorRef) {
+constructor(private spinner: NgxSpinnerService,private api: ApiService, private http: HttpClient,private breakpointObserver:BreakpointObserver,private cdr:ChangeDetectorRef) {
   this.chartOptions ={
    series: [],
    chart: {
@@ -164,14 +165,14 @@ constructor(private spinner: NgxSpinnerService,private api: DistrictService, pri
  });
 }
 ngOnInit(): void {
-  debugger
+  
    this.spinner.show();
-  this.getAllDispatchPending()
+  this.getALLReceiptPending()
   // setTimeout(() => this.loadData(), 10000); 
   this.loadData()
 }
 
-getAllDispatchPending() {
+getALLReceiptPending() {
   this.spinner.show();
   this.api.receiptPending().subscribe(res => {
     this.dispatchPendings = res;
@@ -185,7 +186,7 @@ getAllDispatchPending() {
 }
 
 applyTextFilter(event: Event) {
-  debugger
+  
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
 

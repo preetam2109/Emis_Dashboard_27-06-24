@@ -24,6 +24,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import html2canvas from 'html2canvas';
+import { ApiService } from 'src/app/service/api.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -79,7 +80,7 @@ export class ApexChartComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private cdr:ChangeDetectorRef,private breakpointObserver:BreakpointObserver,private route: Router, private rcapi: DistrictService) {
+  constructor(private cdr:ChangeDetectorRef,private breakpointObserver:BreakpointObserver,private route: Router, private rcapi: ApiService) {
     this.chartOptions = {
       series: [],
       chart: {
@@ -162,11 +163,11 @@ export class ApexChartComponent {
   
 
   ngOnInit() {
-    this.getAllRC();
+    this.getAllComplaints();
     setTimeout(() => this.loadData(), 1000); 
   }
 
-  getAllRC() {
+  getAllComplaints() {
     this.rcapi.overAllComplaints().subscribe(res => {
       this.allComplaints = res;
       this.dataSource.data = res;
@@ -185,7 +186,7 @@ export class ApexChartComponent {
   }
 
   applyTextFilter(event: Event) {
-    debugger
+    
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -195,7 +196,7 @@ export class ApexChartComponent {
   }
 
   loadData() {
-    debugger
+    
     this.rcapi.districtWiseComplaints().subscribe((data: any) => {
       const categories: string[] = [];
       const total: number[] = [];

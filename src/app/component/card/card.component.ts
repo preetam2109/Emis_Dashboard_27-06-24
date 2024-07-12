@@ -26,6 +26,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import html2canvas from 'html2canvas';
+import { ApiService } from 'src/app/service/api.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -49,7 +50,7 @@ export class CardComponent implements OnInit {
   selectedTabIndex: number = 0;
 
   selectedTabValue(event: any): void {
-    debugger
+    
     this.selectedTabIndex = event.index;
   }
   // @ViewChild('chart') chart: ChartComponent | undefined 
@@ -85,7 +86,7 @@ export class CardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private cdr:ChangeDetectorRef,private breakpointObserver:BreakpointObserver,private route: Router, private rcapi: DistrictService) {
+  constructor(private cdr:ChangeDetectorRef,private breakpointObserver:BreakpointObserver,private route: Router, private rcapi: ApiService) {
     // this.chartOptions = {
     //   series: [],
     //   chart: {
@@ -192,7 +193,7 @@ export class CardComponent implements OnInit {
   // }
 
   // applyTextFilter(event: Event) {
-  //   debugger
+  //   
   //   const filterValue = (event.target as HTMLInputElement).value;
   //   this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -202,7 +203,7 @@ export class CardComponent implements OnInit {
   // }
 
   // loadData() {
-  //   debugger
+  //   
   //   this.rcapi.districtWiseComplaints().subscribe((data: any) => {
   //     const categories: string[] = [];
   //     const total: number[] = [];

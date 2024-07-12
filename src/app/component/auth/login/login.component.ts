@@ -18,7 +18,7 @@ export class LoginComponent {
 
   }
   handleLogin() {
-    debugger
+    
      console.log(this.username);
     //if(this.username==="mdcgmsc" && this.password === '2025#cgmsc') {
     if(this.hardcodedAuthenticationService.authenticate(this.username, this.password)) {
