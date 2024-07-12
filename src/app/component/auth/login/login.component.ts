@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HardcodedAuthenticationService } from 'src/app/service/authentication/hardcoded-authentication.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +14,7 @@ export class LoginComponent {
   errorMessage="Invalid Credential";
   invalidLogin=false;
   
-  constructor(private router:Router,public  hardcodedAuthenticationService:HardcodedAuthenticationService){
+  constructor(private toastr: ToastrService,private router:Router,public  hardcodedAuthenticationService:HardcodedAuthenticationService){
 
   }
   handleLogin() {
@@ -24,9 +24,11 @@ export class LoginComponent {
     if(this.hardcodedAuthenticationService.authenticate(this.username, this.password)) {
       //Redirect to Welcome Page
       this.invalidLogin = false
+      this.toastr.success('Logged in Successful', 'Welcome!');
       this.router.navigate(['home'])
     } else {
       this.invalidLogin = true
+      this.toastr.error('Login Failed', 'Invalid Credentials');
     }
   }
   

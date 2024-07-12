@@ -38,6 +38,7 @@ import { DispatchPendingOneComponent } from './component/dispatch-pending-one/di
 import { DatePipe } from '@angular/common';
 import { LoginComponent } from './component/auth/login/login.component';
 import { LogoutComponent } from './component/auth/logout/logout.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { LogoutComponent } from './component/auth/logout/logout.component';
     HttpClientModule,
     MatTabsModule,
     NgApexchartsModule,
-    MatTableExporterModule
+    MatTableExporterModule,
+    ToastrModule.forRoot()
     // MatTabGroup
   ],
   providers: [DatePipe],
