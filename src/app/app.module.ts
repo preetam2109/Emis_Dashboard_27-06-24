@@ -79,7 +79,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatTabsModule,
     NgApexchartsModule,
     MatTableExporterModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right' // Set the position to top right
+    })
     // MatTabGroup
   ],
   providers: [DatePipe],

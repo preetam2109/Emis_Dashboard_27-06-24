@@ -1,3 +1,8 @@
+
+.toast-top-right {
+  top: 12px; /* Adjust the top position */
+  right: 12px; /* Adjust the right position */
+}
 .container {
   display: flex;
   justify-content: center;

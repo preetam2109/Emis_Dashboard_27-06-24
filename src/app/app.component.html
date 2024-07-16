@@ -2,6 +2,7 @@
   <p style="color: white"> Please wait... </p>
 </ngx-spinner>
 
+
 <ng-container *ngIf="!isLoginPage">
   <mat-toolbar color="primary" class="mat-elevation-z8">
     <button (click)="drawer.toggle()" mat-icon-button>
@@ -48,4 +49,11 @@
 
 <ng-container *ngIf="isLoginPage">
   <router-outlet></router-outlet>
+  <div (click)="handleOutsideClick($event)" class="add-to-home-screen-container"  >
+  <div [class.show]="showButton" class="add-to-home-screen">
+    <!-- <img src="assets/favicon.ico" alt="App Icon"> -->
+    <button (click)="addToHomeScreen()">Add to Home screen</button>
+    <button class="close-btn" (click)="hideAddToHomeScreen()">×</button>
+  </div>
+</div>
 </ng-container>
