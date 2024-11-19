@@ -1,0 +1,45 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .container-fluid {
+    /* background: url('') no-repeat center center fixed; */
+    background-size: cover;
+  }
+  
+  .card {
+    background: #f0fcff;
+    border-radius: 15px;
+  }
+  
+  h3 {
+    color: #0056b3;
+  }
+  
+  h5 {
+    color: #4e73df;
+  }
+  
+  .btn-primary {
+    background: #0062cc;
+    border: none;
+  }
+  
+  .btn-info {
+    background: #17a2b8;
+    border: none;
+  }
+  
+  input::placeholder {
+    color: #6c757d;
+  }
+  
+  .input-group-text {
+    background: #e9ecef;
+  }
+  
+  .small.text-muted {
+    font-size: 0.8em;
+  }
+  

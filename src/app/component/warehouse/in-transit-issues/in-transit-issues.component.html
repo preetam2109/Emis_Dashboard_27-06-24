@@ -1,0 +1,58 @@
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex align-items-center mb-3">
+      <button class="btn btn-light me-2" (click)="toggleMenu()">
+        <i class="bi bi-list"></i>
+      </button>
+      <!-- <h4 class="m-0">In-Transit Issues</h4> -->
+    <div class="container" style="text-align: center; max-width: 100%; overflow-x: auto;">
+
+      <h1 style="color: rgb(50, 50, 164);"><strong>In-Transit Issues</strong></h1>
+    </div>
+
+    </div>
+  
+    <!-- Dropdowns and Remarks -->
+    <div class="card p-3">
+      <div class="mb-3">
+        <label for="itemDropdown" class="form-label"><strong>Select Item:</strong></label>
+        <select id="itemDropdown" class="form-select" [(ngModel)]="selectedItem" (change)="onItemChange()">
+          <option *ngFor="let item of items" [value]="item.ponoid">{{ item.details }}</option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label for="statusDropdown" class="form-label"><strong>Status:</strong></label>
+        <select id="statusDropdown" class="form-select" [(ngModel)]="selectedStatus" (change)="onMasRemarksChange()" >
+          <option *ngFor="let status of statuses" [value]="status.remid">{{ status.remarks }}</option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label for="remark" class="form-label"><strong>Remark (Optional):</strong></label>
+        <textarea id="remark" class="form-control" rows="2" [(ngModel)]="remark"></textarea>
+      </div>
+  
+      <button class="btn btn-primary w-100" (click)="saveData()">Save</button>
+    </div>
+  
+    <!-- Details Section -->
+    <!-- <div class="card p-3 mt-4">
+      <div class="text-center bg-light p-2 rounded mb-3">
+        <strong>Code:</strong> {{ selectedItemCode }} /
+        <strong>PO:</strong> {{ purchaseOrder }} /
+        <strong>Dated:</strong> {{ dated }}
+      </div>
+  
+      <div>
+        <p><strong>Previous Action:</strong> {{ previousAction }} / {{ actionDate }}</p>
+        <p><strong>1. Days Since PO:</strong> {{ daysSincePO }} Days</p>
+        <p><strong>2. Item:</strong> {{ selectedItemName }}</p>
+        <p><strong>3. Strength:</strong> {{ strength }}</p>
+        <p><strong>4. SKU:</strong> {{ sku }}</p>
+        <p><strong>5. NIB Required:</strong> {{ nibRequired ? 'Yes' : 'No' }}</p>
+        <p><strong>6. Ordered QTY:</strong> {{ orderedQty }}</p>
+      </div>
+    </div> -->
+  </div>
+  
