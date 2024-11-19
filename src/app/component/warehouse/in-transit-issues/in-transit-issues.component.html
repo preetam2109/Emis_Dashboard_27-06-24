@@ -14,19 +14,32 @@
   
     <!-- Dropdowns and Remarks -->
     <div class="card p-3">
-      <div class="mb-3">
-        <label for="itemDropdown" class="form-label"><strong>Select Item:</strong></label>
-        <select id="itemDropdown" class="form-select" [(ngModel)]="selectedItem" (change)="onItemChange()">
-          <option *ngFor="let item of items" [value]="item.ponoid">{{ item.details }}</option>
-        </select>
+      <div class="card p-3">
+        <div class="mb-3">
+          <label for="itemDropdown" class="form-label"><strong>Select Item:</strong></label>
+          <ng-select 
+            [items]="items" 
+            bindLabel="details" 
+            bindValue="ponoid" 
+            [(ngModel)]="selectedItem" 
+            (change)="onItemChange()"
+            [searchable]="true">
+          </ng-select>
+        </div>
+      
+        <div class="mb-3">
+          <label for="statusDropdown" class="form-label"><strong>Status:</strong></label>
+          <ng-select 
+            [items]="statuses" 
+            bindLabel="remarks" 
+            bindValue="remid" 
+            [(ngModel)]="selectedStatus" 
+            (change)="onMasRemarksChange()"
+            [searchable]="true">
+          </ng-select>
+        </div>
       </div>
-  
-      <div class="mb-3">
-        <label for="statusDropdown" class="form-label"><strong>Status:</strong></label>
-        <select id="statusDropdown" class="form-select" [(ngModel)]="selectedStatus" (change)="onMasRemarksChange()" >
-          <option *ngFor="let status of statuses" [value]="status.remid">{{ status.remarks }}</option>
-        </select>
-      </div>
+      
   
       <div class="mb-3">
         <label for="remark" class="form-label"><strong>Remark (Optional):</strong></label>

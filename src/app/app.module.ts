@@ -34,7 +34,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { DHSComponent } from './component/dhs/dhs.component';
 import { DispatchPendingOneComponent } from './component/dispatch-pending-one/dispatch-pending-one.component';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { LoginComponent } from './component/auth/login/login.component';
 import { LogoutComponent } from './component/auth/logout/logout.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -86,7 +86,8 @@ import { QcPendingToPickLabComponent } from './component/qc-pending-to-pick-lab/
 import {APP_BASE_HREF} from '@angular/common';
 import { VehicleTrackingComponent } from './component/vehicle-tracking/vehicle-tracking.component';
 import { InTransitIssuesComponent } from './component/warehouse/in-transit-issues/in-transit-issues.component';
-import { AsdfComponent } from './component/warehouse/asdf/asdf.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 
 @NgModule({
@@ -159,9 +160,12 @@ import { AsdfComponent } from './component/warehouse/asdf/asdf.component';
     QcPendingToPickLabComponent,
     VehicleTrackingComponent,
     InTransitIssuesComponent,
-    AsdfComponent,
+    
   ],
   imports: [
+    NgSelectModule,
+    FormsModule,
+    CommonModule,
     DatePipe,
     FontAwesomeModule,
     NgxSpinnerModule.forRoot({ type: 'line-scale-party' }),
