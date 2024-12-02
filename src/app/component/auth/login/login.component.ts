@@ -26,7 +26,7 @@ export class LoginComponent {
     localStorage.removeItem
     
     //  console.log(this.username);
-    //if(this.username==="mdcgmsc" && this.password === '2025#cgmsc') {
+    //if(this.username==="SEC1" && this.password === '2025#cgmsc') {
       this.loginService.executeAuthenticationService(this.emailid, this.pwd).subscribe(
         res => {
     if (res.message === "Successfully Login"){

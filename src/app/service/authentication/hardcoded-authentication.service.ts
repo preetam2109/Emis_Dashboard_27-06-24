@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 //   constructor() {}
 
 //   authenticate(username: any, password: any) {
-//     if (username == 'mdcgmsc' || username == 'gmfin@dpdmis.in' && password == '2025#cgmsc') {
+//     if (username == 'SEC1' || username == 'gmfin@dpdmis.in' && password == '2025#cgmsc') {
 //       sessionStorage.setItem('authenticatedUser', username);
 //       return true;
 //     }
@@ -30,7 +30,7 @@ export class HardcodedAuthenticationService {
   constructor() {}
 
   authenticate(username: any, password: any) {
-    if (username === 'mdcgmsc' && password === '2025#cgmsc') {
+    if (username === 'SEC1' && password === '2025#cgmsc') {
       sessionStorage.setItem('authenticatedUser', username);
       sessionStorage.setItem('role', 'MD'); // Assign MD role
       return true;

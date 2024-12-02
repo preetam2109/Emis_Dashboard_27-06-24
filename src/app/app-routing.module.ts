@@ -49,6 +49,18 @@ import { DistributionComponent } from './component/distribution/distribution.com
 import { QcDasboardLabComponent } from './component/qc-dasboard-lab/qc-dasboard-lab.component';
 import { VehicleTrackingComponent } from './component/vehicle-tracking/vehicle-tracking.component';
 import { InTransitIssuesComponent } from './component/warehouse/in-transit-issues/in-transit-issues.component';
+import { EdlNonEdlIssuePercentSummary } from './Model/EdlNonEdlIssuePercentSummary';
+import { EdlNonEdlIssuePercentSummaryComponent } from './component/DHS-Components/edl-non-edl-issue-percent-summary/edl-non-edl-issue-percent-summary.component';
+import { IssuePerWisePerClickComponent } from './component/DHS-Components/issue-per-wise-per-click/issue-per-wise-per-click.component';
+import { IssuedPerWiseComponent } from './component/DHS-Components/issued-per-wise/issued-per-wise.component';
+import { DistrictWiseStockComponent } from './component/district-wise-stock/district-wise-stock.component';
+import { DdlItemWiseInHandQty } from './Model/DdlItemWiseInHandQty';
+import { DdlItemWiseInHandQtyComponent } from './component/ddl-item-wise-in-hand-qty/ddl-item-wise-in-hand-qty.component';
+import { DistFACwiseStockPostionNewComponent } from './component/dist-facwise-stock-postion-new/dist-facwise-stock-postion-new.component';
+import { SeasonDrugsComponent } from './component/season-drugs/season-drugs.component';
+import { WarehouseInfoComponent } from './component/DHS-Components/warehouse-info/warehouse-info.component';
+import { FacCoverageComponent } from './component/DHS-Components/fac-coverage/fac-coverage.component';
+import { StockSummaryBalanceIndentComponent } from './component/DHS-Components/stock-summary-balance-indent/stock-summary-balance-indent.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -59,65 +71,75 @@ const routes: Routes = [
   { path: 'home',component: CategorySelectionComponent,canActivate:[RouteGuardService]}, 
 
 // MD routes
-{ path: 'welcome', component: HomeComponent, canActivate: [RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  // {path:'autocomplete',component:AutocompleteComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  // {path:'input',component:InputComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'card',component:CardComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['MDCGMSC']} },
-  // {path:'slider',component:SliderComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  // {path:'table',component:TableComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'form',component:FormdesignComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  // {path:'associate',component:AssociateComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'Rcdetail',component:RCDetailReportComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'complaints',component:ComplaintsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'apex',component:ApexChartComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'dispatchPending',component:DispatchPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'receiptPending',component:ReceiptPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'installationPending',component:InstallationPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'dhs',component:DHSComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'dhs-one',component:DispatchPendingOneComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
+{ path: 'welcome', component: HomeComponent, canActivate: [RouteGuardService],data: { allowedRoles: ['SEC1','DHS','CME']} },
+  // {path:'autocomplete',component:AutocompleteComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  // {path:'input',component:InputComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'card',component:CardComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
+  // {path:'slider',component:SliderComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  // {path:'table',component:TableComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'form',component:FormdesignComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  // {path:'associate',component:AssociateComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'Rcdetail',component:RCDetailReportComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'complaints',component:ComplaintsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'apex',component:ApexChartComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'dispatchPending',component:DispatchPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'receiptPending',component:ReceiptPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'installationPending',component:InstallationPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'dhs',component:DHSComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'dhs-one',component:DispatchPendingOneComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
 
 
   // gm routes
-  {path:'emd',component:EmdComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['MDCGMSC']} },
-  {path:'emd-pending',component:EmdPendingComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['MDCGMSC']} },
-  {path:'emd-released',component:EmdReleasedComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['MDCGMSC']} },
-  {path:'emd-pending-tenderwise',component:EmdPendingTenderwiseComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['MDCGMSC']} },
-  {path:'emd-dashboard',component:EmdDashboardComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['MDCGMSC']} },
+  {path:'emd',component:EmdComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
+  {path:'emd-pending',component:EmdPendingComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
+  {path:'emd-released',component:EmdReleasedComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
+  {path:'emd-pending-tenderwise',component:EmdPendingTenderwiseComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
+  {path:'emd-dashboard',component:EmdDashboardComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
   //whstock abstract
-  {path:'whStockAbstract',component:WhStockAbstractComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'drugs',component:WhStockDrugsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'consumables',component:WhStockConsumablesComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'reagent',component:WhStockReagentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'stockDetails',component:CGMSCStockDetailsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC','QC','WH']} },
+  {path:'whStockAbstract',component:WhStockAbstractComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS','CME']} },
+  {path:'drugs',component:WhStockDrugsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'consumables',component:WhStockConsumablesComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'reagent',component:WhStockReagentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'stockDetails',component:CGMSCStockDetailsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','QC','Warehouse']} },
 
 
   // indent pending 
-  {path:'IndentPendingWHdash',component:IndentPendingWhDasComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  // {path:'IndentPendingWH',component:IndentPendingWHComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-  {path:'ReagentIndentPendingWH',component:ReagentIndentPendingWhComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
+  {path:'IndentPendingWHdash',component:IndentPendingWhDasComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+  // {path:'IndentPendingWH',component:IndentPendingWHComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+  {path:'ReagentIndentPendingWH',component:ReagentIndentPendingWhComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
 
   //cgmsc stock 
-  {path:'stockDetailsDrugs',component:CgmscstockDrugsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC','QC','WH']} },
-  {path:'stockDetailsConsumables',component:CgmscstockConsumablesComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC','QC','WH']} },
-  {path:'stockDetailsAyush',component:CgmscstockAyushComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC','QC','WH']} },
-  {path:'stockDetailsReagent',component:CgmscstockReagentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC','QC','WH']} },
+  {path:'stockDetailsDrugs',component:CgmscstockDrugsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','QC','Warehouse']} },
+  {path:'stockDetailsConsumables',component:CgmscstockConsumablesComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','QC','Warehouse']} },
+  {path:'stockDetailsAyush',component:CgmscstockAyushComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','QC','Warehouse']} },
+  {path:'stockDetailsReagent',component:CgmscstockReagentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','QC','Warehouse']} },
 
 // near expiry
-{path:'nearExpiry',component:NearExpiryComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
+{path:'nearExpiry',component:NearExpiryComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
 
 // reagent issue
-{path:'ReagentIssue',component:ReagentIssueComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
+{path:'ReagentIssue',component:ReagentIssueComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
 
 //qc pendings
-{path:'QcPendings',component:QcPendingsComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['MDCGMSC']} },
-{path:'nocApproval',component:NocApprovalComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-{path:'noc',component:NOCComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-{path:'iwhPending',component:IwhPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-{path:'qc-lab-send',component:QCLabSendComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-{path:'distribution',component:DistributionComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-{path:'qc-dash',component:QcDasboardLabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC']} },
-{path:'vehicleTracking',component:VehicleTrackingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC','WH']} },
-{path:'intransitIssues',component:InTransitIssuesComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['MDCGMSC','WH']} },
+{path:'QcPendings',component:QcPendingsComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
+{path:'nocApproval',component:NocApprovalComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+{path:'noc',component:NOCComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'iwhPending',component:IwhPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+{path:'qc-lab-send',component:QCLabSendComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+{path:'distribution',component:DistributionComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS','CME']} },
+{path:'qc-dash',component:QcDasboardLabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
+{path:'vehicleTracking',component:VehicleTrackingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','Warehouse']} },
+{path:'intransitIssues',component:InTransitIssuesComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['Warehouse']} },
+{path:'EdlNonEdlIssuePercentSummary',component:EdlNonEdlIssuePercentSummaryComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'IssuePerWisePerClick',component:IssuePerWisePerClickComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'IssuedPerWise',component:IssuedPerWiseComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'DistrictWiseStk',component:DistrictWiseStockComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'DdlItemWiseInHandQty',component:DdlItemWiseInHandQtyComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'DistFACwiseStockPostionNew',component:DistFACwiseStockPostionNewComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'SeasonDrugs',component:SeasonDrugsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
+{path:'WarehouseInfo',component:WarehouseInfoComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'FacCoverage',component:FacCoverageComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'StockSummaryBalanceIndent',component:StockSummaryBalanceIndentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 
 
 

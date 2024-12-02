@@ -83,7 +83,7 @@ export class CgmscstockDetailsDrugsComponent {
   //   );
   // }
     getAllDispatchPending() {
-      debugger
+      
     
       if(this.loginService.getRole().roleName==='WH'){
           this.whid=sessionStorage.getItem('facilityid')

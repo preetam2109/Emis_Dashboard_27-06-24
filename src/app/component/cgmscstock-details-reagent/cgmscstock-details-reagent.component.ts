@@ -84,7 +84,7 @@ export class CgmscstockDetailsReagentComponent {
   //   );
   // }
     getAllDispatchPending() {
-      debugger
+      
     
       if(this.loginService.getRole().roleName==='WH'){
           this.whid=sessionStorage.getItem('facilityid')

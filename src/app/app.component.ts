@@ -10,7 +10,10 @@ import { BasicAuthenticationService } from './service/authentication/basic-authe
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent implements OnInit,DoCheck {
+  
   deferredPrompt: any;
   showButton = false;
   title!:'CGMSC DASHBOARD'
@@ -29,8 +32,25 @@ export class AppComponent implements OnInit,DoCheck {
   }
 
 
+  
 
-  menuItems: { label: string; route: string }[] = [];
+
+
+  menuItems: { label: string; route: string; submenu?: { label: string; route: string }[] }[] = [];
+  expandedMenus: { [key: string]: boolean } = {}; // Track expanded state for each menu item
+
+  toggleSubmenu(menuLabel: string): void {
+    for (const key in this.expandedMenus) {
+      if (key !== menuLabel) {
+        this.expandedMenus[key] = false; // Collapse all other menus
+      }
+    }
+  
+    // Toggle the clicked submenu
+    this.expandedMenus[menuLabel] = !this.expandedMenus[menuLabel];
+  }
+  
+  
   role:any = ''; // Dynamic role
 
 
@@ -54,14 +74,14 @@ this.router.navigate(['login'])
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isLoginPage = event.urlAfterRedirects === '/login';
-        debugger
+        
         this.role = this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service
         this.updateMenu();
       }
     });
   }
   ngDoCheck(): void {
-    debugger
+    // 
   
     const role =this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service
     // this.role = this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service

@@ -32,7 +32,7 @@ export class CategorySelectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger
+    
     this.role = this.loginService.getRole().roleName;
     
      

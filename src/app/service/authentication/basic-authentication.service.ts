@@ -11,7 +11,7 @@ export class BasicAuthenticationService {
 
   executeAuthenticationService(emailid: string, pwd: string) {
     
-    return this.http.post<any>('http://140.238.246.250:8080/api/Login', { emailid, pwd }).pipe(
+    return this.http.post<any>('https://dpdmis.in/CGMSCHO_API2/api/Login', { emailid, pwd }).pipe(
       map(
         data => {
           
@@ -19,6 +19,8 @@ export class BasicAuthenticationService {
           sessionStorage.setItem('authenticatedUser', emailid);
           sessionStorage.setItem('firstname', userInfo.firstname);
           sessionStorage.setItem('facilityid', userInfo.facilityid);
+          // 
+          sessionStorage.setItem('userid', userInfo.userid);
 
           // sessionStorage.setItem('role',data.userInfo.approle);
           // this.authenticate(emailid,pwd)                                
@@ -33,8 +35,8 @@ export class BasicAuthenticationService {
         // sessionStorage.setItem('facilityTypeId', userInfo?.facilitytypeid?.toString() || ''); // Handle potential nulls
         // sessionStorage.setItem('warehouseId', ''); // Set warehouseId to null (empty string)
            // Save role if available
-           if (userInfo?.approle) {
-            this.setRole(userInfo.approle);
+           if (userInfo?.rolename) {
+            this.setRole(userInfo.rolename);
           }
 
           return data;
@@ -45,7 +47,7 @@ export class BasicAuthenticationService {
 
   // authenticate(emailid: any, pwd: any) {
     
-  //   if (emailid === 'mdcgmsc@dpdmis.in' && pwd === 'Admin@cgmsc123') {
+  //   if (emailid === 'SEC1@dpdmis.in' && pwd === 'Admin@cgmsc123') {
   //     sessionStorage.setItem('authenticatedUser', emailid);
   //     sessionStorage.setItem('role', 'MD'); // Assign MD role
   //     return true;

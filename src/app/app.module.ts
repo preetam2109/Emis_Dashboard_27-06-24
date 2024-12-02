@@ -13,13 +13,12 @@ import { HomeComponent } from './component/home/home.component';
 import { CardComponent } from './component/card/card.component';
 // import { SliderComponent } from './component/slider/slider.component';
 // import { TableComponent } from './component/table/table.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormdesignComponent } from './component/formdesign/formdesign.component';
 // import { PopupComponent } from './component/popup/popup.component';
 // import { AssociateComponent } from './component/associate/associate.component';
 // import { UserdetailComponent } from './component/userdetail/userdetail.component';
-import {MatTabsModule,MatTabGroup} from '@angular/material/tabs';
-import { FooterComponent } from './component/footer/footer.component';
+import {MatTabsModule} from '@angular/material/tabs';
 import { RCDetailReportComponent } from './rcdetail-report/rcdetail-report.component';
 import { ComplaintsComponent } from './component/complaints/complaints.component';
 import { ApexChartComponent } from './component/apex-chart/apex-chart.component';
@@ -34,7 +33,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { DHSComponent } from './component/dhs/dhs.component';
 import { DispatchPendingOneComponent } from './component/dispatch-pending-one/dispatch-pending-one.component';
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { LoginComponent } from './component/auth/login/login.component';
 import { LogoutComponent } from './component/auth/logout/logout.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -87,108 +86,103 @@ import {APP_BASE_HREF} from '@angular/common';
 import { VehicleTrackingComponent } from './component/vehicle-tracking/vehicle-tracking.component';
 import { InTransitIssuesComponent } from './component/warehouse/in-transit-issues/in-transit-issues.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CommonModule } from '@angular/common';
 
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    // InputComponent,
-    // AutocompleteComponent,
-    MenubarComponent,
-    HomeComponent,
-    CardComponent,
-    // SliderComponent,
-    // TableComponent,
-    FormdesignComponent,
-    // PopupComponent,
-    // AssociateComponent,
-    // UserdetailComponent,
-    // FooterComponent,
-    RCDetailReportComponent,
-    ComplaintsComponent,
-    ApexChartComponent,
-    DispatchPendingComponent,
-    ReceiptPendingComponent,
-    InstallationPendingComponent,
-    DHSComponent,
-    DispatchPendingOneComponent,
-    LoginComponent,
-    LogoutComponent,
-    EmdComponent,
-    EmdPendingComponent,
-    EmdReleasedComponent,
-    // EmdEndingTenderwiseComponent,
-    EmdPendingTenderwiseComponent,
-    EmdDashboardComponent,
-    WhStockAbstractComponent,
-    WhStockDrugsComponent,
-    WhStockConsumablesComponent,
-    WhStockReagentComponent,
-    IndentPendingWHComponent,
-    CGMSCStockDetailsComponent,
-    CgmscstockDrugsComponent,
-    CgmscstockConsumablesComponent,
-    CgmscstockAyushComponent,
-    CgmscstockReagentComponent,
-    WarehouseStockDialogComponent,
-    NearExpiryComponent,
-    IndentPendingWhDasComponent,
-    ReagentIndentPendingWhComponent,
-    ReagentIssueComponent,
-    TotalPipeLineDialogComponent,
-    ItemDialogComponent,
-    QcPendingsComponent,
-    NocApprovalComponent,
-    QcPendingPickWhComponent,
-    QcPendingDropHoComponent,
-    CategorySelectionComponent,
-    IwhPendingComponent,
-    IwhPendingTabOneComponent,
-    IwhPendingTabTwoComponent,
-    NOCComponent,
-    NOCPendingAtCGMSCComponent,
-    CgmscstockDetailsDrugsComponent,
-    CgmscstockDetailsConsumablesComponent,
-    CgmscstockDetailsReagentComponent,
-    CgmscstockDetailsAyushComponent,
-    QCResultsComponent,
-    QCLabSendComponent,
-    CollectorLoginComponent,
-    DistributionComponent,
-    QcDasboardLabComponent,
-    QcPendingToPickLabComponent,
-    VehicleTrackingComponent,
-    InTransitIssuesComponent,
-    
-  ],
-  imports: [
-    NgSelectModule,
-    FormsModule,
-    CommonModule,
-    DatePipe,
-    FontAwesomeModule,
-    NgxSpinnerModule.forRoot({ type: 'line-scale-party' }),
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    MatTabsModule,
-    NgApexchartsModule,
-    MatDialogModule,
-    MatTableModule,
-    MatTableExporterModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-top-right' // Set the position to top right
-    })
-    // MatTabGroup
-  ],
-  providers: [DatePipe,{provide: APP_BASE_HREF, useValue: '/mddashboard'}],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        // InputComponent,
+        // AutocompleteComponent,
+        MenubarComponent,
+        HomeComponent,
+        CardComponent,
+        // SliderComponent,
+        // TableComponent,
+        FormdesignComponent,
+        // PopupComponent,
+        // AssociateComponent,
+        // UserdetailComponent,
+        // FooterComponent,
+        RCDetailReportComponent,
+        ComplaintsComponent,
+        ApexChartComponent,
+        DispatchPendingComponent,
+        ReceiptPendingComponent,
+        InstallationPendingComponent,
+        DHSComponent,
+        DispatchPendingOneComponent,
+        LoginComponent,
+        LogoutComponent,
+        EmdComponent,
+        EmdPendingComponent,
+        EmdReleasedComponent,
+        // EmdEndingTenderwiseComponent,
+        EmdPendingTenderwiseComponent,
+        EmdDashboardComponent,
+        WhStockAbstractComponent,
+        WhStockDrugsComponent,
+        WhStockConsumablesComponent,
+        WhStockReagentComponent,
+        IndentPendingWHComponent,
+        CGMSCStockDetailsComponent,
+        CgmscstockDrugsComponent,
+        CgmscstockConsumablesComponent,
+        CgmscstockAyushComponent,
+        CgmscstockReagentComponent,
+        WarehouseStockDialogComponent,
+        NearExpiryComponent,
+        IndentPendingWhDasComponent,
+        ReagentIndentPendingWhComponent,
+        ReagentIssueComponent,
+        TotalPipeLineDialogComponent,
+        ItemDialogComponent,
+        QcPendingsComponent,
+        NocApprovalComponent,
+        QcPendingPickWhComponent,
+        QcPendingDropHoComponent,
+        CategorySelectionComponent,
+        IwhPendingComponent,
+        IwhPendingTabOneComponent,
+        IwhPendingTabTwoComponent,
+        NOCComponent,
+        NOCPendingAtCGMSCComponent,
+        CgmscstockDetailsDrugsComponent,
+        CgmscstockDetailsConsumablesComponent,
+        CgmscstockDetailsReagentComponent,
+        CgmscstockDetailsAyushComponent,
+        QCResultsComponent,
+        QCLabSendComponent,
+        CollectorLoginComponent,
+        DistributionComponent,
+        QcDasboardLabComponent,
+        QcPendingToPickLabComponent,
+        VehicleTrackingComponent,
+        InTransitIssuesComponent,
+    ],
+    bootstrap: [AppComponent], imports: [
+      NgSelectModule,
+        FormsModule,
+        CommonModule,
+        DatePipe,
+        FontAwesomeModule,
+        NgxSpinnerModule.forRoot({ type: 'line-scale-party' }),
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatTabsModule,
+        NgApexchartsModule,
+        MatDialogModule,
+        MatTableModule,
+        MatTableExporterModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-top-right' // Set the position to top right
+        })
+        // MatTabGroup
+    ], providers: [DatePipe, { provide: APP_BASE_HREF, useValue: '/mddashboard' }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);

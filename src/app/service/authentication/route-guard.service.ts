@@ -35,6 +35,7 @@ export class RouteGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    
     const isLoggedIn = this.loginService.isUserLogedIn() 
     // || this.loginService.isAAMConsultantLoggedIn();
     

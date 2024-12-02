@@ -74,7 +74,7 @@ export class EmdDashboardComponent implements OnInit {
   }
 
   getDashboardData(): void {
-    this.http.get<DPDMISEMDDashboard[]>(`http://140.238.246.250:8080/api/EMD/DPDMISEMDDashboard`)
+    this.http.get<DPDMISEMDDashboard[]>(`https://dpdmis.in/CGMSCHO_API2/api/EMD/DPDMISEMDDashboard`)
       .subscribe((data: DPDMISEMDDashboard[]) => {
         this.dashboardData = data;
         this.updateChart();

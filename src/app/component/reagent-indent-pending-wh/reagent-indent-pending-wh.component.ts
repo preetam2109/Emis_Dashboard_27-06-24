@@ -153,7 +153,7 @@ export class ReagentIndentPendingWhComponent {
     setTimeout(() => this.loadData(), 10000);
       // console.log('ngOnInit is triggered');
       // console.log("MMID value:", this.mmid); 
-      // this.http.get<ReagIndentPending[]>('http://140.238.246.250:8080/api/Warehouse/ReagIndentPending?mmid=0').subscribe(
+      // this.http.get<ReagIndentPending[]>('https://dpdmis.in/CGMSCHO_API2/api/Warehouse/ReagIndentPending?mmid=0').subscribe(
       //   (res:ReagIndentPending[]) => {
       //     this.dispatchPendings = res.map((item:ReagIndentPending,index:number) => ({
       //       ...item,
@@ -175,7 +175,7 @@ export class ReagentIndentPendingWhComponent {
    getAllDispatchPending() {
     this.spinner.show();
 
-     this.http.get<ReagIndentPending[]>('http://140.238.246.250:8080/api/Warehouse/ReagIndentPending?mmid=0').subscribe(
+     this.http.get<ReagIndentPending[]>('https://dpdmis.in/CGMSCHO_API2/api/Warehouse/ReagIndentPending?mmid=0').subscribe(
     (res:ReagIndentPending[]) => {
       this.dispatchPendings = res.map((item:ReagIndentPending,index:number) => ({
         ...item,

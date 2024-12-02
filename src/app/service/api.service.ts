@@ -1,4 +1,4 @@
-import { HttpClient,HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Districts } from '../Model/Districts';
 import {  Complaints } from '../Model/Complaints';
@@ -44,6 +44,23 @@ import { InTransitHOtoLab } from '../Model/InTransitHOtoLab';
 import { VehicleInfo } from '../Model/VehicleInfo';
 import { PipelineDDLTransit } from '../Model/PipelineDDLTransit';
 import { MasRecRemarks } from '../Model/MasRecRemarks';
+import { PipelineDetailsGrid } from '../Model/PipelineDetailsGrid';
+import { GetVehicleEntriesExits } from '../Model/GetVehicleEntriesExits';
+import { EdlNonEdlIssuePercentSummary } from '../Model/EdlNonEdlIssuePercentSummary';
+import { IssuePerWisePerClick } from '../Model/IssuePerWisePerClick';
+import { IssuedPerWise } from '../Model/IssuedPerWise';
+import { DistrictWiseStock } from '../Model/DistrictWiseStock';
+import { DdlItemWiseInHandQty } from '../Model/DdlItemWiseInHandQty';
+import { MasDistrict } from '../Model/MasDistrict';
+import { DistFACwiseStockPostionNew } from '../Model/DistFACwiseStockPostionNew';
+import { SeasonDrugs } from '../Model/SeasonDrugs';
+import { WarehouseInfo } from '../Model/WarehouseInfo';
+import { FacCoverage } from '../Model/FacCoverage';
+import { StockSummaryBalanceIndent } from '../Model/StockSummaryBalanceIndent';
+import { StockSummaryBalanceIndentDetails } from '../Model/StockSummaryBalanceIndentDetails';
+import { NearExpRCDetails } from '../Model/NearExpRCDetails';
+import { SupplyDuration } from '../Model/SupplyDuration';
+import { POSuppyTimeTakenYear } from '../Model/POSuppyTimeTakenYear';
 
 
 @Injectable({
@@ -92,19 +109,19 @@ export class ApiService {
  }
  //emd status summary
  getEmdStatusSummary(){
-  return this.http.get<DPDMISSupemdSummary[]>(`http://140.238.246.250:8080/api/EMD/DPDMISSupemdSummary`)
+  return this.http.get<DPDMISSupemdSummary[]>(`https://dpdmis.in/CGMSCHO_API2/api/EMD/DPDMISSupemdSummary`)
  }
  //emd status datails
  getEmdStatus(){
-  return this.http.get<EmdStatusDetail[]>(`http://140.238.246.250:8080/api/EMD/DPDMISEMDDetails`)
+  return this.http.get<EmdStatusDetail[]>(`https://dpdmis.in/CGMSCHO_API2/api/EMD/DPDMISEMDDetails`)
  }
  getDPDMISEMDTenderwisePendin(){
-  return this.http.get<DPDMISEMDTenderwisePending[]>(`http://140.238.246.250:8080/api/EMD/DPDMISEMDTenderwisePending`)
+  return this.http.get<DPDMISEMDTenderwisePending[]>(`https://dpdmis.in/CGMSCHO_API2/api/EMD/DPDMISEMDTenderwisePending`)
 
  }
 //  getemdDashboerd
 DPDMISEMDDashboardSummary(){
-  return this.http.get<DPDMISEMDDashboard[]>(`http://140.238.246.250:8080/api/EMD/DPDMISEMDDashboard`)
+  return this.http.get<DPDMISEMDDashboard[]>(`https://dpdmis.in/CGMSCHO_API2/api/EMD/DPDMISEMDDashboard`)
 }
 
   getDispatchPending(){
@@ -143,7 +160,7 @@ getWHStockData(mcatid: number, warehouseId: number): Observable<any> {
     .set('mcatid', mcatid.toString())
     .set('warehouseId', warehouseId.toString());
 
-  return this.http.get<any>(`http://140.238.246.250:8080/api/HO/CGMSCStockValueData`, { params });
+  return this.http.get<any>(`https://dpdmis.in/CGMSCHO_API2/api/HO/CGMSCStockValueData`, { params });
 }
 
 CGMSCStockDetails(mcatid: number, EDLNedl: string, mitemid: number, WHID: number, searchP: number, userid: number, coll_cmho: number): Observable<any> {
@@ -159,13 +176,13 @@ CGMSCStockDetails(mcatid: number, EDLNedl: string, mitemid: number, WHID: number
     coll_cmho: coll_cmho.toString(),
   };
 
-  return this.http.get<CGMSCStockDetails[]>(`http://140.238.246.250:8080/api/HO/CGMSCItemStock`, { params });
+  return this.http.get<CGMSCStockDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/HO/CGMSCItemStock`, { params });
 }
 
 //indent pending at Warehouse  api
 getIndentPendingAtWHData(per: string = 'All', clause: number = 1): Observable<any> {
 
-  return this.http.get<any>(`http://140.238.246.250:8080/api/Warehouse/IndentPending?per=${per}&clause=${clause}`);
+  return this.http.get<any>(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/IndentPending?per=${per}&clause=${clause}`);
 }
 getIndentPendingAtWHDetails(whid: number, clause: number, factype: number): Observable<any> {
   const params = new HttpParams()
@@ -173,21 +190,21 @@ getIndentPendingAtWHDetails(whid: number, clause: number, factype: number): Obse
     .set('clause', clause.toString())
     .set('factype', factype.toString());
 
-  return this.http.get<IndentPendingWH>(`http://140.238.246.250:8080/api/Warehouse/IndentPendingDetails`, { params });
+  return this.http.get<IndentPendingWH>(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/IndentPendingDetails`, { params });
 }
 
 
  // Method for ReagIndentPending with mmid
  getReagIndentPending(mmid: any){
   ;
-  return this.http.get<ReagIndentPending[]>(`http://140.238.246.250:8080/api/Warehouse/ReagIndentPending?mmid=${mmid}`);
+  return this.http.get<ReagIndentPending[]>(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/ReagIndentPending?mmid=${mmid}`);
 }
 
 
 // Method for ReagIndentPendingEQ
 getReagIndentPendingEQ(){
   
-  return this.http.get<ReagIndentPendingEQSummary[]>(`http://140.238.246.250:8080/api/Warehouse/ReagIndentPendingEQ`);
+  return this.http.get<ReagIndentPendingEQSummary[]>(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/ReagIndentPendingEQ`);
 }
 
 
@@ -201,7 +218,7 @@ getWarehouseWiseStock(mitemid:number,whid:number): Observable<any> {
   .set('mitemid',mitemid.toString())
     .set('whid', whid.toString());
      
-  return this.http.get<WarehouseWiseStock>(`http://140.238.246.250:8080/api/HO/WarehouseWiseStock`, { params });
+  return this.http.get<WarehouseWiseStock>(`https://dpdmis.in/CGMSCHO_API2/api/HO/WarehouseWiseStock`, { params });
 
 }
 // NearExpReport
@@ -211,7 +228,7 @@ getNearExpReport(mcid:number,nexppara:number): Observable<any> {
   .set('mcid',mcid.toString())
     .set('nexppara', nexppara.toString());
      
-  return this.http.get<NearExpReport>(`http://140.238.246.250:8080/api/HO/NearExpReport`, { params });
+  return this.http.get<NearExpReport>(`https://dpdmis.in/CGMSCHO_API2/api/HO/NearExpReport`, { params });
 
 }
 NearExpReportbatch(mcid:number,nexppara:number,expmonth:string): Observable<any> {
@@ -221,19 +238,19 @@ NearExpReportbatch(mcid:number,nexppara:number,expmonth:string): Observable<any>
     .set('nexppara', nexppara.toString())
     .set('expmonth', expmonth.toString());
      
-  return this.http.get<NearExpReportbatch>(`http://140.238.246.250:8080/api/HO/NearExpReportbatch`, { params });
+  return this.http.get<NearExpReportbatch>(`https://dpdmis.in/CGMSCHO_API2/api/HO/NearExpReportbatch`, { params });
 
 }
 
 //reagIndentIssue
 
 getReagIndentIssueMMID(){
-return this.http.get<ReagIndentIssueMMID[]>(`http://140.238.246.250:8080/api/Warehouse/ReagIndentIssueMMID`);
+return this.http.get<ReagIndentIssueMMID[]>(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/ReagIndentIssueMMID`);
 }
 
 getReagIndentIssueDetails(mmid:any){
 
-return this.http.get<ReagIndentIssueDetails[]>(`http://140.238.246.250:8080/api/Warehouse/ReagIndentIssueDetails?mmid=${mmid}`)
+return this.http.get<ReagIndentIssueDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/ReagIndentIssueDetails?mmid=${mmid}`)
 
 }
 
@@ -241,7 +258,7 @@ return this.http.get<ReagIndentIssueDetails[]>(`http://140.238.246.250:8080/api/
 getPipelineDetails(ponoid: number, itemid: number, mcid: number, whid: number, userid: number): Observable<any> {
   
 
-  return this.http.get<PipelineDetails[]>(`http://140.238.246.250:8080/api/HO/getPipelineDetails?ponoid=${ponoid}&itemid=${itemid}&mcid=${mcid}&whid=${whid}&userid=${userid}`);
+  return this.http.get<PipelineDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/HO/getPipelineDetails?ponoid=${ponoid}&itemid=${itemid}&mcid=${mcid}&whid=${whid}&userid=${userid}`);
 }
 
 // getgetItemDetails 
@@ -264,84 +281,189 @@ getItemDetails(mcid: number, itemid: number, groupid: number, itemtypeid: number
     whid: whid.toString()
   };
 
-  return this.http.get<ItemDetailsPopup[]>(`http://140.238.246.250:8080/api/HO/getItemDetailsWithHOD`, { params });
+  return this.http.get<ItemDetailsPopup[]>(`https://dpdmis.in/CGMSCHO_API2/api/HO/getItemDetailsWithHOD`, { params });
 }
 
 //GetRaisedPicks
 GetRaisedPicks(){
-  return this.http.get<GetRaisedPicks[]>(`http://140.238.246.250:8080/api/Courier/GetRaisedPicks`)
+  return this.http.get<GetRaisedPicks[]>(`https://dpdmis.in/CGMSCHO_API2/api/Courier/GetRaisedPicks`)
 }
 GetPendingToPick(warehouseid:number){
-  return this.http.get<GetPendingToPick[]>(`http://140.238.246.250:8080/api/Courier/GetPendingToPick?warehouseid=${warehouseid}`);
+  return this.http.get<GetPendingToPick[]>(`https://dpdmis.in/CGMSCHO_API2/api/Courier/GetPendingToPick?warehouseid=${warehouseid}`);
 }
 
 getUndroppedDocket(monthFlag:number){
-return this.http.get<UndroppedDocket>(`http://140.238.246.250:8080/api/Courier/getUndroppedDocket?monthFlag=${monthFlag}`);
+return this.http.get<UndroppedDocket>(`https://dpdmis.in/CGMSCHO_API2/api/Courier/getUndroppedDocket?monthFlag=${monthFlag}`);
 }
 getPendingToDrop(warehouseid:number){
-  return this.http.get<PendingToDrop>(`http://140.238.246.250:8080/api/Courier/GetPendingToDrop?warehouseid=${warehouseid}`);
+  return this.http.get<PendingToDrop>(`https://dpdmis.in/CGMSCHO_API2/api/Courier/GetPendingToDrop?warehouseid=${warehouseid}`);
   }
 
 //NOCApprovedSummary
 getNOCApprovedSummary(){
-  return this.http.get<NOCApprovedSummary[]>(`http://140.238.246.250:8080/api/NOC/CGMSCNOCApprovedSummary`)
+  return this.http.get<NOCApprovedSummary[]>(`https://dpdmis.in/CGMSCHO_API2/api/NOC/CGMSCNOCApprovedSummary`)
 }
 CGMSCNOCPendingSummary(){
-  return this.http.get<CGMSCNOCPendingSummary[]>(`http://140.238.246.250:8080/api/NOC/CGMSCNOCPendingSummary`)
+  return this.http.get<CGMSCNOCPendingSummary[]>(`https://dpdmis.in/CGMSCHO_API2/api/NOC/CGMSCNOCPendingSummary`)
 }
 CGMSCNOCPendingDetails(nocid:number){
-  return this.http.get<CGMSCNOCPendingDetails[]>(`http://140.238.246.250:8080/api/NOC/CGMSCNOCPendingDetails?nocid=${nocid}`)
+  return this.http.get<CGMSCNOCPendingDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/NOC/CGMSCNOCPendingDetails?nocid=${nocid}`)
 }
 
 getNOCApprovedDetails(facilityid:number){
-  return this.http.get(`http://140.238.246.250:8080/api/NOC/CGMSCNOCApprovedDetails?facilityid=${facilityid}`);
+  return this.http.get(`https://dpdmis.in/CGMSCHO_API2/api/NOC/CGMSCNOCApprovedDetails?facilityid=${facilityid}`);
 }
 getNOCApprovedDetailsYN(facilityid:number,YN:any){
-  return this.http.get(`http://140.238.246.250:8080/api/NOC/CGMSCNOCApprovedDetails?facilityid=${facilityid}&YN=${YN}`);
+  return this.http.get(`https://dpdmis.in/CGMSCHO_API2/api/NOC/CGMSCNOCApprovedDetails?facilityid=${facilityid}&YN=${YN}`);
 }
 getInitiatedNotIssueSummary(dcflag:any,mcid:any){
-  return this.http.get<InitiatedNotIssueSummary>(`http://140.238.246.250:8080/api/IWH/InitiatedNotIssueSummary?dcflag=${dcflag}&mcid=${mcid}`);
+  return this.http.get<InitiatedNotIssueSummary>(`https://dpdmis.in/CGMSCHO_API2/api/IWH/InitiatedNotIssueSummary?dcflag=${dcflag}&mcid=${mcid}`);
 }
 getIInitiatedNotIssueDetaqils(whid: number, stkout: number, dcflag: string, mcid: number){
   
-  return this.http.get<InitiatedNotIssueDetaqils>(`http://140.238.246.250:8080/api/IWH/InitiatedNotIssueDetaqils?whid=${whid}&stkout=${stkout}&dcflag=${dcflag}&mcid=${mcid}`);
+  return this.http.get<InitiatedNotIssueDetaqils>(`https://dpdmis.in/CGMSCHO_API2/api/IWH/InitiatedNotIssueDetaqils?whid=${whid}&stkout=${stkout}&dcflag=${dcflag}&mcid=${mcid}`);
 }
 getIWHPiplineSummary(dcflag:any,mcid:any){
-  return this.http.get<IWHPiplineSummary>(`http://140.238.246.250:8080/api/IWH/IWHPiplineSummary?dcflag=${dcflag}&mcid=${mcid}`);
+  return this.http.get<IWHPiplineSummary>(`https://dpdmis.in/CGMSCHO_API2/api/IWH/IWHPiplineSummary?dcflag=${dcflag}&mcid=${mcid}`);
 }
 getIWHPiplineDetails(towhid: number, stkout: number, dcflag: string, mcid: number){
-  return this.http.get<IWHPiplineDetails>(`http://140.238.246.250:8080/api/IWH/IWHPiplineDetails?towhid=${towhid}&stkout=${stkout}&dcflag=${dcflag}&mcid=${mcid}`);
+  return this.http.get<IWHPiplineDetails>(`https://dpdmis.in/CGMSCHO_API2/api/IWH/IWHPiplineDetails?towhid=${towhid}&stkout=${stkout}&dcflag=${dcflag}&mcid=${mcid}`);
 }
 
 
 getLabIssuePendingSummary(mcid: number){
-  return this.http.get<LabIssuePendingSummary[]>(`http://140.238.246.250:8080/api/QC/LabIssuePendingSummary?mcid=${mcid}`);
+  return this.http.get<LabIssuePendingSummary[]>(`https://dpdmis.in/CGMSCHO_API2/api/QC/LabIssuePendingSummary?mcid=${mcid}`);
 }
 
 getLabIssuePendingDetails(mcid: number,delaypara1: any): Observable<any>{
   
-  return this.http.get<LabIssuePendingDetails[]>(`http://140.238.246.250:8080/api/QC/LabIssuePendingDetails?mcid=${mcid}&delaypara1=${delaypara1}`);
+  return this.http.get<LabIssuePendingDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/QC/LabIssuePendingDetails?mcid=${mcid}&delaypara1=${delaypara1}`);
 }
 getHODYearWiseIssuanceSummary(mcatid:any,hodid:any){
-  return this.http.get<HODYearWiseIssuanceSummary>(`http://140.238.246.250:8080/api/HO/HODYearWiseIssuanceSummary?mcatid=${mcatid}&hodid=${hodid}`);
+  return this.http.get<HODYearWiseIssuanceSummary>(`https://dpdmis.in/CGMSCHO_API2/api/HO/HODYearWiseIssuanceSummary?mcatid=${mcatid}&hodid=${hodid}`);
 }
 getnTransitHOtoLab(mcid:any,instorPickPending:any){
-  return this.http.get<InTransitHOtoLab[]>(`http://140.238.246.250:8080/api/QC/InTransitHOtoLab?instorPickPending=${instorPickPending}&mcid=${mcid}`);
+  return this.http.get<InTransitHOtoLab[]>(`https://dpdmis.in/CGMSCHO_API2/api/QC/InTransitHOtoLab?instorPickPending=${instorPickPending}&mcid=${mcid}`);
 }
 getInTransitHOtoLabDetails(instorPickPending:any,mcid:any,delaypara1:any,isdrop:any,labid:any){
-return this.http.get<InTransitHOtoLab[]>(`http://140.238.246.250:8080/api/QC/InTransitHOtoLabDetails?instorPickPending=${instorPickPending}&mcid=${mcid}&delaypara1=${delaypara1}&isdrop=${isdrop}&labid=${labid}`);
+return this.http.get<InTransitHOtoLab[]>(`https://dpdmis.in/CGMSCHO_API2/api/QC/InTransitHOtoLabDetails?instorPickPending=${instorPickPending}&mcid=${mcid}&delaypara1=${delaypara1}&isdrop=${isdrop}&labid=${labid}`);
 }
 getVehicleInfoReport(IsStopped:any,isWarehouseVhicle:any,fromDate:any,toDate:any){
-return this.http.get<VehicleInfo[]>(`http://140.238.246.250:8080/api/ANPR/VhicleInfo?IsStopped=${IsStopped}&isWarehouseVhicle=${isWarehouseVhicle}&fromDate=${fromDate}&toDate=${toDate}`);
+return this.http.get<VehicleInfo[]>(`https://dpdmis.in/CGMSCHO_API2/api/ANPR/VhicleInfo?IsStopped=${IsStopped}&isWarehouseVhicle=${isWarehouseVhicle}&fromDate=${fromDate}&toDate=${toDate}`);
 }
 
 getPipelineDDLTransit(mcid:any,whid:any,userid:any){
-return this.http.get<PipelineDDLTransit[]>(`http://140.238.246.250:8080/api/HO/getPipelineDDLTransit?mcid=${mcid}&whid=${whid}&userid=${userid}`);
+return this.http.get<PipelineDDLTransit[]>(`https://dpdmis.in/CGMSCHO_API2/api/HO/getPipelineDDLTransit?mcid=${mcid}&whid=${whid}&userid=${userid}`);
 }
 
 getMasRecRemarks(whid:any,whsup:any){
-return this.http.get<MasRecRemarks[]>(`http://140.238.246.250:8080/api/Master/MasRecRemarks?whid=${whid}&whsup=${whsup}`);
+return this.http.get<MasRecRemarks[]>(`https://dpdmis.in/CGMSCHO_API2/api/Master/MasRecRemarks?whid=${whid}&whsup=${whsup}`);
 }
+
+getPipelineDetailsGrid(ponoid: any, itemid: number, mcid: number, whid: any, userid: any): Observable<any> {
+  // Construct the query parameters
+  const params = new HttpParams()
+    .set('ponoid', ponoid.toString())
+    .set('itemid', itemid.toString())
+    .set('mcid', mcid.toString())
+    .set('whid', whid.toString())
+    .set('userid', userid.toString());
+
+  // Make the HTTP GET request
+  return this.http.get<PipelineDetailsGrid[]>(`https://dpdmis.in/CGMSCHO_API2/api/HO/getPipelineDetails`, { params });
+}
+
+GetWarehouseInfo(whid:any){
+  return this.http.get(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/GetWarehouseInfo?whid=${whid}`)
+}
+
+getVehicleEntriesExits(whid:any,previousNDays:any,tranId:any,plateNo:any){
+  return this.http.get<GetVehicleEntriesExits[]>(`https://dpdmis.in/CGMSCHO_API2/api/Warehouse/GetVehicleEntriesExits?whid=${whid}&previousNDays=${previousNDays}&tranId=${tranId}&plateNo=${plateNo}`)
+}
+
+insertTblRecvProgress_WithVhicle(remid:any,remarks:any,ponoid:any,whid:any,tranId:any,plateNo:any){
+  
+  return this.http.post(`https://dpdmis.in/CGMSCHO_API2/api/HO/insertTblRecvProgress_WithVhicle?remid=${remid}&remarks=${remarks}&ponoid=${ponoid}&whid=${whid}&tranId=${tranId}&plateNo=${plateNo}`,{}, {responseType: 'text'})
+
+}
+
+getEdlNonEdlIssuePercentSummary(yearid:any){
+  return this.http.get<EdlNonEdlIssuePercentSummary[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/EdlNonEdlIssuePercentSummary?yearid=${yearid}`);
+
+}
+
+getIssuePerWisePerClick(yearid:any,orderdp:any){
+  
+  return this.http.get<IssuePerWisePerClick[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/IssuePerWisePerClick?yearid=${yearid}&orderdp=${orderdp}`);
+
+}
+getIssuedPerWise(yearid:any){
+  return this.http.get<IssuedPerWise[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/IssuedPerWise?yearid=${yearid}`);
+
+}
+getDistrictWiseStock(mcid:any){
+  return this.http.get<DistrictWiseStock[]>(`https://dpdmis.in/CGMSCHO_API2/api/District/DistrictWiseStock?mcid=${mcid}`);
+
+}
+getMasDistrict(allDist:any,whid:any,distid:any,userid:any,coll_cmho:any){
+  return this.http.get<MasDistrict[]>(`https://dpdmis.in/CGMSCHO_API2/api/Master/MasDistrict?allDist=${allDist}&whid=${whid}&distid=${distid}&userid=${userid}&coll_cmho=${coll_cmho}`);
+
+}
+
+getDdlItemWiseInHandQty(distId:any){
+  return this.http.get<DdlItemWiseInHandQty[]>(`https://dpdmis.in/CGMSCHO_API2/api/District/DdlItemWiseInHandQty?distId=${distId}`);
+
+}
+getDistFACwiseStockPostionNew(disid:any,coll_cmho:any,mcatid:any,EDLNedl:any,mitemid:any,userid:any){
+  return this.http.get<DistFACwiseStockPostionNew[]>(`https://dpdmis.in/CGMSCHO_API2/api/District/DistFACwiseStockPostionNew?disid=${disid}&coll_cmho=${coll_cmho}&mcatid=${mcatid}&EDLNedl=${EDLNedl}&mitemid=${mitemid}&userid=${userid}`);
+
+}
+
+getSeasonDrugs(seasonname: string, groupid: number, itemtypeid: number, storeType: string): Observable<any> {
+  const apiUrl = `https://dpdmis.in/CGMSCHO_API2/api/HOD/SeasonDrugs`;
+  const params = new HttpParams()
+    .set('seasonname', seasonname)
+    .set('groupid', groupid.toString())
+    .set('itemtypeid', itemtypeid.toString())
+    .set('storeType', storeType);
+
+  return this.http.get<SeasonDrugs[]>(apiUrl, { params });
+}
+
+
+getWarehouseInfo(): Observable<any> {
+  return this.http.get<WarehouseInfo[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/WarehouseInfo`);
+}
+
+
+getFacCoverage(): Observable<any> {
+  return this.http.get<FacCoverage[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/FacCoverage`);
+}
+
+getStockSummaryBalanceIndent(yearid:any,mcid:any): Observable<any> {
+  return this.http.get<StockSummaryBalanceIndent[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/StockSummaryBalanceIndent?yearid=${yearid}&mcid=${mcid}`);
+}
+
+getStockSummaryBalanceIndentDetails(yearid:any,mcid:any,orderid:any): Observable<any> {
+  return this.http.get<StockSummaryBalanceIndentDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/StockSummaryBalanceIndentDetails?yearid=${yearid}&mcid=${mcid}&orderid=${orderid}`);
+}
+getNearExpRCDetails(mcid:any,mmpara:any): Observable<any> {
+  return this.http.get<NearExpRCDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/NearExpRCDetails?mcid=${mcid}&mmpara=${mmpara}`);
+}
+
+getPOSuppyTimeTakenYear(mcid:any,duration:any,supplierid:any): Observable<any> {
+  return this.http.get<POSuppyTimeTakenYear[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/POSuppyTimeTakenYear?mcid=${mcid}&duration=${duration}&supplierid=${supplierid}`);
+}
+
+SupplyDuration(): Observable<any> {
+  return this.http.get<SupplyDuration[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/SupplyDuration`);
+}
+
+
+
+
+
+
 
 
 }

@@ -270,6 +270,7 @@ export class DispatchPendingOneComponent {
     this.spinner.show();
     this.api.getDispatchPendingSummary().subscribe(
       (data: any) => {
+        
         const supplier: string[] = [];
         const nositems: number[] = [];
         const nospo: number[] = [];

@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { text } from '@fortawesome/fontawesome-svg-core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { GetVehicleEntriesExits } from 'src/app/Model/GetVehicleEntriesExits';
 import { MasRecRemarks } from 'src/app/Model/MasRecRemarks';
 import { PipelineDDLTransit } from 'src/app/Model/PipelineDDLTransit';
+import {  PipelineDetailsGrid } from 'src/app/Model/PipelineDetailsGrid';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -9,81 +13,147 @@ import { ApiService } from 'src/app/service/api.service';
   templateUrl: './in-transit-issues.component.html',
   styleUrls: ['./in-transit-issues.component.css']
 })
-export class InTransitIssuesComponent {
+export class InTransitIssuesComponent implements OnInit {
+  pipelineDetails: PipelineDetailsGrid[] = [];
   items: PipelineDDLTransit[] = []; // List of items from the API
   statuses: MasRecRemarks[] = [];
-  selectedItem: any = null;
+  vehicles:GetVehicleEntriesExits[]=[];
+  selectedItem: PipelineDDLTransit | null = null; // Store the entire object
   selectedStatus: string = '';
+  selectedVehicleNumber: string = '0';
+  plateNo:any=0
   remark: string = '';
+  isanpractive:any
 
-  // Details for the selected item
-  selectedItemCode: string = '';
-  purchaseOrder: string = '';
-  dated: string = '';
-  previousAction: string = '';
-  actionDate: string = '';
-  daysSincePO: number = 0;
-  selectedItemName: string = '';
-  strength: string = '';
-  sku: string = '';
-  nibRequired: boolean = false;
-  orderedQty: number = 0;
-
-  constructor(private api: ApiService,private http: HttpClient) {}
+  constructor(private spinner: NgxSpinnerService,private api: ApiService, private http: HttpClient) {}
 
   ngOnInit() {
-    // this.fetchItems();
-    this.onItemChange()
-    this.onMasRemarksChange()
-  }
-
-  fetchItems() {
-    this.http.get<any[]>('API_URL').subscribe((data) => {
-      this.items = data;
-    });
-  }
-
-  onItemChange() {
-    this.api.getPipelineDDLTransit(0,2617,3049).subscribe((res:PipelineDDLTransit[])=>{
-      this.items=res
-    })
+    // this.spinner.show();\
     
-    // const selectedItem = this.items.find((item) => item.id === this.selectedItem);
-    // if (selectedItem) {
-      // Populate details for the selected item
-      // this.selectedItemCode = selectedItem.code;
-      // this.purchaseOrder = selectedItem.po;
-      // this.dated = selectedItem.date;
-      // this.previousAction = selectedItem.previousAction;
-      // this.actionDate = selectedItem.actionDate;
-      // this.daysSincePO = selectedItem.daysSincePO;
-      // this.selectedItemName = selectedItem.name;
-      // this.strength = selectedItem.strength;
-      // this.sku = selectedItem.sku;
-      // this.nibRequired = selectedItem.nibRequired;
-      // this.orderedQty = selectedItem.orderedQty;
+    this.getWarehouseInfo();
+    this.loadItems();
+    this.loadStatuses();
+    // this.loadGetVehicleEntriesExits()
+    // if(this.isanpractive==='Y'){
+
     // }
   }
 
-  onMasRemarksChange(){
-    this.api.getMasRecRemarks(2617,'WH').subscribe((res:MasRecRemarks[])=>{
-      this.statuses=res
+  getWarehouseInfo(){
+    this.api.GetWarehouseInfo(sessionStorage.getItem('facilityid')).subscribe((res:any)=>{
+        this.isanpractive=res[0].isanpractive
+         if(this.isanpractive==='Y'){
+          this.loadGetVehicleEntriesExits()
+
+    }
+        console.log('in tranproactive ',this.isanpractive)
     })
   }
 
-  saveData() {
-    const payload = {
-      itemId: this.selectedItem,
-      status: this.selectedStatus,
-      remark: this.remark,
-    };
+  // Fetch Pipeline Details only after selectedItem is available
+  fetchPipelineDetails() {
+    this.spinner.show();
+    
+    if (this.selectedItem) {
+      // Ensure selectedItem is available before making the API call
+      const ponoid = this.selectedItem;
+      console.log('Fetching pipeline details for PONOID:', ponoid);
 
-    this.http.post('API_URL_TO_SAVE', payload).subscribe((response:any) => {
-      console.log('Data saved successfully:', response);
+      this.api.getPipelineDetailsGrid(ponoid, 0, 0, sessionStorage.getItem('facilityid'), sessionStorage.getItem('userid')).subscribe(
+        (response: PipelineDetailsGrid[]) => {
+          this.pipelineDetails = response; // Store the response data
+          console.log('Pipeline Details:', this.pipelineDetails);
+           // Log or use the data
+           this.spinner.hide();
+        },
+        (error) => {
+          console.error('Error fetching pipeline details:', error);
+          this.spinner.hide();
+
+        }
+      );
+    } else {
+      console.error('Selected item is null. Cannot fetch pipeline details.');
+      this.spinner.hide();
+
+    }
+  }
+
+  // Load items from the API
+  loadItems() {
+    // this.spinner.show();
+    this.api.getPipelineDDLTransit(0, sessionStorage.getItem('facilityid'), sessionStorage.getItem('userid')).subscribe((res: PipelineDDLTransit[]) => {
+      this.items = res;
+      console.log('Items loaded:', this.items); // Debugging: Print items
+      this.fetchPipelineDetails();
+      // this.spinner.hide();
+
     });
   }
 
-  toggleMenu() {
-    console.log('Menu toggled');
+  // Load statuses from the API
+  loadStatuses() {
+    this.api.getMasRecRemarks(sessionStorage.getItem('facilityid'), 'WH').subscribe((res: MasRecRemarks[]) => {
+      this.statuses = res;
+      console.log('Statuses loaded:', this.statuses); // Debugging: Print statuses
+    });
+  }
+
+  loadGetVehicleEntriesExits() {
+    
+    this.api.getVehicleEntriesExits(sessionStorage.getItem('facilityid'), 7,0,0).subscribe((res: GetVehicleEntriesExits[])=>  {
+      this.vehicles = res;
+      this.plateNo=res[0].vplateno
+      console.log('vehicles loaded:', this.vehicles); // Debugging: Print statuses
+    });
+  }
+
+
+  // Triggered when the item is selected
+  onItemChange() {
+    this.spinner.show();
+    if (this.selectedItem) {
+      console.log('Selected item:', this.selectedItem); // Print selected item
+      this.fetchPipelineDetails();
+    }
+  }
+  onMasVehicleChange() {
+    if (this.selectedVehicleNumber) {
+      console.log('Selected vnumber:', this.selectedVehicleNumber); // Print selected item
+      // this.fetchPipelineDetails();
+    }
+  }
+
+  // Triggered when the status is selected
+  onMasRemarksChange() {
+    console.log('Selected status ID:', this.selectedStatus); // Print selected status
+  }
+
+  saveData() {
+    // const apiUrl = 'https://dpdmis.in/CGMSCHO_API2/api/HO/insertTblRecvProgress_WithVhicle';
+  
+    // const params = {
+    //   remid: this.selectedStatus.toString(),
+    //   remarks: this.remark,
+    //   ponoid: this.selectedItem,
+    //   whid: sessionStorage.getItem('facilityid'),
+    //   tranId: this.selectedVehicleNumber,
+    //   plateNo: this.plateNo
+    // };
+  
+    this.api.insertTblRecvProgress_WithVhicle(this.selectedStatus,this.remark,this.selectedItem,sessionStorage.getItem('facilityid'),this.selectedVehicleNumber,this.plateNo).subscribe(
+      (response) => {
+        console.log('POST successful:', response);
+        alert('Data inserted successfully.');
+      },
+      (error) => {
+        console.error('POST failed:', error);
+        alert('Failed to insert data.');
+      }
+    );
   }
 }
+
+// if(isnpr==yes)
+//   textbox=plateno
+//   tranID=dropdown

@@ -79,7 +79,7 @@
     <span class="example-spacer" style="flex-grow: 1;"></span>
   
     <!-- Welcome message on the right -->
-    <h4 class="responsive-h4" style="margin: 0 1rem; white-space: nowrap;" *ngIf="roleName ==='WH'" >
+    <h4 class="responsive-h4" style="margin: 0 1rem; white-space: nowrap;" *ngIf="roleName ==='Warehouse' || 'DHS' || 'SEC1' " >
       Welcome:<strong> {{ firstname }}</strong>
     </h4>
   
@@ -211,12 +211,27 @@
   <mat-drawer-container autosize>
     <mat-drawer #drawer opened="false" mode="side" position="start" mode="over">
       <mat-nav-list>
-        <ng-container *ngIf="menuItems.length > 0">
-          <mat-list-item *ngFor="let item of menuItems">
-            <button [routerLink]="item.route" mat-button (click)="drawer.close()">
+        <ng-container *ngFor="let item of menuItems">
+          <!-- Main Menu Item -->
+          <mat-list-item>
+            <button mat-button (click)="item.submenu ? toggleSubmenu(item.label) : drawer.close()" [routerLink]="!item.submenu ? item.route : null">
               <mat-icon>format_list_bulleted</mat-icon> {{ item.label }}
+              
+              <!-- Conditionally Show Arrow for Submenus -->
+              <mat-icon *ngIf="item.submenu">
+                {{ expandedMenus[item.label] ? 'expand_less' : 'expand_more' }}
+              </mat-icon>
             </button>
           </mat-list-item>
+  
+          <!-- Submenu -->
+          <div *ngIf="expandedMenus[item.label]" class="submenu">
+            <mat-list-item *ngFor="let subItem of item.submenu">
+              <button [routerLink]="subItem.route" mat-button (click)="drawer.close()">
+                <mat-icon>subdirectory_arrow_right</mat-icon> {{ subItem.label }}
+              </button>
+            </mat-list-item>
+          </div>
         </ng-container>
   
         <ng-container *ngIf="menuItems.length === 0">
@@ -232,10 +247,12 @@
     <mat-drawer-content>
       <div style="text-align: center; min-height: 100vh;">
         <router-outlet></router-outlet>
-     </div>
-     
+      </div>
     </mat-drawer-content>
   </mat-drawer-container>
+  
+  
+  
   
 </ng-container>
 

@@ -1,3 +1,19 @@
+.submenu {
+  margin-left: 20px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.submenu mat-list-item {
+  padding-left: 16px; /* Add extra padding for submenu items */
+}
+
+.submenu[hidden] {
+  max-height: 0;
+  padding: 0;
+}
+
+
 .mat-toolbar.mat-dark {
     background: #000;
     color: #fff;
