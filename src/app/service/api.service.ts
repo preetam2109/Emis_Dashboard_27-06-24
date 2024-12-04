@@ -61,6 +61,7 @@ import { StockSummaryBalanceIndentDetails } from '../Model/StockSummaryBalanceIn
 import { NearExpRCDetails } from '../Model/NearExpRCDetails';
 import { SupplyDuration } from '../Model/SupplyDuration';
 import { POSuppyTimeTakenYear } from '../Model/POSuppyTimeTakenYear';
+import { PaidTimeTaken } from '../Model/PaidTimeTaken';
 
 
 @Injectable({
@@ -452,11 +453,17 @@ getNearExpRCDetails(mcid:any,mmpara:any): Observable<any> {
 }
 
 getPOSuppyTimeTakenYear(mcid:any,duration:any,supplierid:any): Observable<any> {
+  debugger
   return this.http.get<POSuppyTimeTakenYear[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/POSuppyTimeTakenYear?mcid=${mcid}&duration=${duration}&supplierid=${supplierid}`);
 }
 
 SupplyDuration(): Observable<any> {
   return this.http.get<SupplyDuration[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/SupplyDuration`);
+}
+
+
+getPaidTimeTaken(mcid:any,HODID:any,QCRequired:any): Observable<any> {
+  return this.http.get<PaidTimeTaken[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/PaidTimeTaken?mcid=${mcid}&HODID=${HODID}&QCRequired=${QCRequired}`);
 }
 
 

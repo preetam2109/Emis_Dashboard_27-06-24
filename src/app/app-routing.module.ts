@@ -61,6 +61,8 @@ import { SeasonDrugsComponent } from './component/season-drugs/season-drugs.comp
 import { WarehouseInfoComponent } from './component/DHS-Components/warehouse-info/warehouse-info.component';
 import { FacCoverageComponent } from './component/DHS-Components/fac-coverage/fac-coverage.component';
 import { StockSummaryBalanceIndentComponent } from './component/DHS-Components/stock-summary-balance-indent/stock-summary-balance-indent.component';
+import { TimeTakenBySupplierComponent } from './component/DHS-Components/time-taken-by-supplier/time-taken-by-supplier.component';
+import { PaidTimeTakenComponent } from './component/DHS-Components/paid-time-taken/paid-time-taken.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -140,6 +142,8 @@ const routes: Routes = [
 {path:'WarehouseInfo',component:WarehouseInfoComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 {path:'FacCoverage',component:FacCoverageComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 {path:'StockSummaryBalanceIndent',component:StockSummaryBalanceIndentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'timetakenBySupplier',component:TimeTakenBySupplierComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'PaidTimeTaken',component:PaidTimeTakenComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 
 
 

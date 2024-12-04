@@ -82,8 +82,10 @@ export class MenuServiceService {
               label: 'Time-Based Analysis',
 
               submenu: [
-                { label: 'District Details', route: 'districtDetails' },
-                { label: 'Facility Details', route: 'facilityDetails' }
+                { label: 'Time Taken By Supplier', route: 'timetakenBySupplier' },
+                { label: 'Paid Time Taken', route: 'PaidTimeTaken' },
+                // { label: 'Facility Details', route: 'facilityDetails' }
+
               ],
               route: ''
             },
@@ -188,8 +190,9 @@ getSubmenu(label: string): { label: string; route: string }[] | undefined {
   debugger
   const submenus:any = {
     'Time-Based Analysis': [
-      { label: 'Time 1 menu', route: 'dsd' },
-      { label: 'Time 2 menu', route: 'dsd' },
+      { label: 'Time Taken By Supplier', route: 'timetakenBySupplier' },
+      { label: 'Paid Time Taken', route: 'PaidTimeTaken' },
+
     ],
   };
   return submenus[label];
