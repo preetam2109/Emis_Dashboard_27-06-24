@@ -19,6 +19,8 @@ export class BasicAuthenticationService {
           sessionStorage.setItem('authenticatedUser', emailid);
           sessionStorage.setItem('firstname', userInfo.firstname);
           sessionStorage.setItem('facilityid', userInfo.facilityid);
+          sessionStorage.setItem('roleId', userInfo.roleid);
+          sessionStorage.setItem('districtid', userInfo.districtid);
           // 
           sessionStorage.setItem('userid', userInfo.userid);
 

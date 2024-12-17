@@ -1,4 +1,4 @@
-import { Component, OnInit,HostListener, DoCheck, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, HostListener, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { HardcodedAuthenticationService } from './service/authentication/hardcoded-authentication.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,14 +12,14 @@ import { BasicAuthenticationService } from './service/authentication/basic-authe
 })
 
 
-export class AppComponent implements OnInit,DoCheck {
-  
+export class AppComponent implements OnInit, DoCheck {
+
   deferredPrompt: any;
   showButton = false;
-  title!:'CGMSC DASHBOARD'
+  title!: 'CGMSC DASHBOARD'
   isLoginPage = false;
-  roleName=localStorage.getItem('roleName')
-  firstname=sessionStorage.getItem('firstname')
+  roleName = localStorage.getItem('roleName')
+  firstname = sessionStorage.getItem('firstname')
 
   @HostListener('window:beforeinstallprompt', ['$event'])
   onbeforeinstallprompt(e: Event) {
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit,DoCheck {
   }
 
 
-  
+
 
 
 
@@ -45,36 +45,53 @@ export class AppComponent implements OnInit,DoCheck {
         this.expandedMenus[key] = false; // Collapse all other menus
       }
     }
-  
+
     // Toggle the clicked submenu
     this.expandedMenus[menuLabel] = !this.expandedMenus[menuLabel];
   }
+
+
+  role: any = ''; // Dynamic role
+
+
+
+
+
+
+
+
+
+
+  constructor(private cdr: ChangeDetectorRef, private menuService: MenuServiceService, private toastr: ToastrService, private router: Router, public basicAuthentication: BasicAuthenticationService) { }
+
+
+  logout() {
+debugger
   
-  
-  role:any = ''; // Dynamic role
+
+    if (sessionStorage.getItem('roleId') === '482') {
+      sessionStorage.clear();
+      localStorage.clear();
+      this.basicAuthentication.logout();
+      this.toastr.success('Logout Successfully');
+      this.router.navigate(['collector-login'])
+
+    } else {
+      sessionStorage.clear();
+      localStorage.clear();
+      this.basicAuthentication.logout();
+      this.toastr.success('Logout Successfully');
+      this.router.navigate(['login'])
+    }
+  }
 
 
-
-
-
-
-
-
-
-
-constructor(private cdr: ChangeDetectorRef,private menuService: MenuServiceService,private toastr: ToastrService,private router: Router,public basicAuthentication:BasicAuthenticationService) {}
-
-logout() {
-this.basicAuthentication.logout();
-this.toastr.success('Logout Successfully');
-this.router.navigate(['login'])
-}
   ngOnInit(): void {
-    
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isLoginPage = event.urlAfterRedirects === '/login';
-        
+        this.isLoginPage = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/collector-login');
+
         this.role = this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service
         this.updateMenu();
       }
@@ -82,12 +99,12 @@ this.router.navigate(['login'])
   }
   ngDoCheck(): void {
     // 
-  
-    const role =this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service
+
+    const role = this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service
     // this.role = this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service
 
     this.roleName = role;
-    this.firstname=sessionStorage.getItem('firstname');
+    this.firstname = sessionStorage.getItem('firstname');
     this.cdr.detectChanges();
 
   }
@@ -112,15 +129,19 @@ this.router.navigate(['login'])
       this.deferredPrompt = null;
     });
   }
-  hideAddToHomeScreen(){
-    this.showButton=false
+  hideAddToHomeScreen() {
+    this.showButton = false
   }
-  handleOutsideClick(event:Event){
-if(this.showButton){
-  this.hideAddToHomeScreen()
-}
+  handleOutsideClick(event: Event) {
+    if (this.showButton) {
+      this.hideAddToHomeScreen()
+    }
   }
-  handleInsideClick(event:Event){
-event.stopPropagation();
+  handleInsideClick(event: Event) {
+    event.stopPropagation();
+  }
+
+  isCollectorLogin(): boolean {
+    return this.router.url === '/collector-login';
   }
 }

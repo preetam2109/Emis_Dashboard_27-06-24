@@ -62,6 +62,17 @@ import { NearExpRCDetails } from '../Model/NearExpRCDetails';
 import { SupplyDuration } from '../Model/SupplyDuration';
 import { POSuppyTimeTakenYear } from '../Model/POSuppyTimeTakenYear';
 import { PaidTimeTaken } from '../Model/PaidTimeTaken';
+import { QCTimeTakenYearwise } from '../Model/QCTimeTakenYearwise';
+import { QCLabYearAvgTime } from '../Model/QCLabYearAvgTime';
+import { StockoutSummary } from '../Model/StockoutSummary';
+import { HODYearWiseIssuance } from '../Model/HODYearWiseIssuance';
+import { DistDrugCount } from '../Model/DistDrugCount';
+import { WHDrugCount } from '../Model/WHDrugCount';
+import { HODPOYear_AgAI } from '../Model/HODPOYear_AgAI';
+import { DirectorateAIDetails } from '../Model/DirectorateAIDetails';
+import { GroupWiseAI_PODetails } from '../Model/GroupWiseAI_PODetails';
+import { Monthwise_Issuance } from '../Model/GroupItemtypeRCStock';
+import { Diswise_Issuance } from '../Model/Diswise_Issuance';
 
 
 @Injectable({
@@ -343,6 +354,9 @@ getLabIssuePendingDetails(mcid: number,delaypara1: any): Observable<any>{
 getHODYearWiseIssuanceSummary(mcatid:any,hodid:any){
   return this.http.get<HODYearWiseIssuanceSummary>(`https://dpdmis.in/CGMSCHO_API2/api/HO/HODYearWiseIssuanceSummary?mcatid=${mcatid}&hodid=${hodid}`);
 }
+getHODYearWiseIssuance(yearid:any,mcatid:any,hodid:any,itemid:any,disid:any){
+  return this.http.get<HODYearWiseIssuance[]>(`https://dpdmis.in/CGMSCHO_API2/api/HO/HODYearWiseIssuance?yearid=${yearid}&mcatid=${mcatid}&hodid=${hodid}&itemid=${itemid}&disid=${disid}`);
+}
 getnTransitHOtoLab(mcid:any,instorPickPending:any){
   return this.http.get<InTransitHOtoLab[]>(`https://dpdmis.in/CGMSCHO_API2/api/QC/InTransitHOtoLab?instorPickPending=${instorPickPending}&mcid=${mcid}`);
 }
@@ -432,13 +446,13 @@ getSeasonDrugs(seasonname: string, groupid: number, itemtypeid: number, storeTyp
 }
 
 
-getWarehouseInfo(): Observable<any> {
-  return this.http.get<WarehouseInfo[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/WarehouseInfo`);
+getWarehouseInfo(distid:any): Observable<any> {
+  return this.http.get<WarehouseInfo[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/WarehouseInfo?distid=${distid}`);
 }
 
 
-getFacCoverage(): Observable<any> {
-  return this.http.get<FacCoverage[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/FacCoverage`);
+getFacCoverage(distid:any): Observable<any> {
+  return this.http.get<FacCoverage[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/FacCoverage?distid=${distid}`);
 }
 
 getStockSummaryBalanceIndent(yearid:any,mcid:any): Observable<any> {
@@ -453,7 +467,7 @@ getNearExpRCDetails(mcid:any,mmpara:any): Observable<any> {
 }
 
 getPOSuppyTimeTakenYear(mcid:any,duration:any,supplierid:any): Observable<any> {
-  debugger
+  
   return this.http.get<POSuppyTimeTakenYear[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/POSuppyTimeTakenYear?mcid=${mcid}&duration=${duration}&supplierid=${supplierid}`);
 }
 
@@ -463,7 +477,59 @@ SupplyDuration(): Observable<any> {
 
 
 getPaidTimeTaken(mcid:any,HODID:any,QCRequired:any): Observable<any> {
+  
   return this.http.get<PaidTimeTaken[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/PaidTimeTaken?mcid=${mcid}&HODID=${HODID}&QCRequired=${QCRequired}`);
+}
+
+getQCTimeTakenYearwise(mcid:any): Observable<any> {
+  
+  return this.http.get<QCTimeTakenYearwise[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/QCTimeTakenYearwise?mcid=${mcid}`);
+}
+getQCLabYearAvgTime(yrid:any): Observable<any> {
+  
+  return this.http.get<QCLabYearAvgTime[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/QCLabYearAvgTime?yrid=${yrid}`);
+}
+getStockoutSummary(yrid:any,isedl:any,mcid:any): Observable<any> {
+  
+  return this.http.get<StockoutSummary[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/StockoutSummary?yrid=${yrid}&isedl=${isedl}&mcid=${mcid}`);
+}
+
+getDistDrugCount(districtId:any,mcid:any,hodid:any): Observable<any> {
+  
+  return this.http.get<DistDrugCount[]>(`https://dpdmis.in/CGMSCHO_API2/api/District/DistDrugCount?districtId=${districtId}&mcid=${mcid}&hodid=${hodid}`);
+}
+WHDrugCount(districtId:any,mcid:any,whid:any): Observable<any> {
+  
+  return this.http.get<WHDrugCount[]>(`https://dpdmis.in/CGMSCHO_API2/api/District/WHDrugCount?districtId=${districtId}&mcid=${mcid}&whid=${whid}`);
+}
+
+HODPOYear_AgAI(mcatid:any,hodid:any,Isall:any,IsagainstAI:any): Observable<any> {
+  
+  return this.http.get<HODPOYear_AgAI[]>(`https://dpdmis.in/CGMSCHO_API2/api/HO/HODPOYear_AgAI?mcatid=${mcatid}&hodid=${hodid}&Isall=${Isall}&IsagainstAI=${IsagainstAI}`);
+}
+
+DirectorateAIDetails(yearid:any,mcid:any,hodid:any,groupid:any,itemtypeid:any): Observable<any> {
+  
+  return this.http.get<DirectorateAIDetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/DirectorateAIDetails?yearid=${yearid}&mcid=${mcid}&hodid=${hodid}&groupid=${groupid}&itemtypeid=${itemtypeid}`);
+}
+
+GroupWiseAI_PODetails(yearid:any,mcid:any,hodid:any): Observable<any> {
+  
+  return this.http.get<GroupWiseAI_PODetails[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/GroupWiseAI_PODetails?yearid=${yearid}&mcid=${mcid}&hodid=${hodid}`);
+}
+
+
+
+Diswise_Issuance(yearid:any,mcid:any,hodid:any): Observable<any> {
+  
+  return this.http.get<Diswise_Issuance[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/Diswise_Issuance?yearid=${yearid}&mcid=${mcid}&hodid=${hodid}`);
+
+}
+
+Monthwise_Issuance(yearid:any,mcid:any,hodid:any): Observable<any> {
+  
+  return this.http.get<Monthwise_Issuance[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/Monthwise_Issuance?yearid=${yearid}&mcid=${mcid}&hodid=${hodid}`);
+
 }
 
 

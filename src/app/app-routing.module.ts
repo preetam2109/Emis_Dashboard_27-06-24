@@ -44,7 +44,7 @@ import { CategorySelectionComponent } from './component/category-selection/categ
 import { IwhPendingComponent } from './component/iwh-pending/iwh-pending.component';
 import { NOCComponent } from './component/noc/noc.component';
 import { QCLabSendComponent } from './component/qc-lab-send/qc-lab-send.component';
-import { CollectorLoginComponent } from './component/collector-login/collector-login.component';
+// import { CollectorLoginComponent } from './component/collector-login/collector-login.component';
 import { DistributionComponent } from './component/distribution/distribution.component';
 import { QcDasboardLabComponent } from './component/qc-dasboard-lab/qc-dasboard-lab.component';
 import { VehicleTrackingComponent } from './component/vehicle-tracking/vehicle-tracking.component';
@@ -63,6 +63,15 @@ import { FacCoverageComponent } from './component/DHS-Components/fac-coverage/fa
 import { StockSummaryBalanceIndentComponent } from './component/DHS-Components/stock-summary-balance-indent/stock-summary-balance-indent.component';
 import { TimeTakenBySupplierComponent } from './component/DHS-Components/time-taken-by-supplier/time-taken-by-supplier.component';
 import { PaidTimeTakenComponent } from './component/DHS-Components/paid-time-taken/paid-time-taken.component';
+import { QCTimeTakenYearwiseComponent } from './component/DHS-Components/qctime-taken-yearwise/qctime-taken-yearwise.component';
+import { QCTimeTabComponent } from './component/DHS-Components/qctime-tab/qctime-tab.component';
+import { StockoutSummaryComponent } from './component/DHS-Components/stockout-summary/stockout-summary.component';
+import { CollectorLoginComponent } from './component/auth/collector-login/collector-login.component';
+import { HODYearWiseIssuanceComponent } from './component/Collector-Components/hodyear-wise-issuance/hodyear-wise-issuance.component';
+import { GrowthInProcurmentComponent } from './component/DHS-Components/growth-in-procurment/growth-in-procurment.component';
+import { GrowthInProcurmentTabComponent } from './component/DHS-Components/growth-in-procurment-tab/growth-in-procurment-tab.component';
+import { DirectorateAIDetailsComponent } from './component/DHS-Components/directorate-aidetails/directorate-aidetails.component';
+import { DistributionTabComponent } from './component/DHS-Components/distribution-tab/distribution-tab.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -73,10 +82,10 @@ const routes: Routes = [
   { path: 'home',component: CategorySelectionComponent,canActivate:[RouteGuardService]}, 
 
 // MD routes
-{ path: 'welcome', component: HomeComponent, canActivate: [RouteGuardService],data: { allowedRoles: ['SEC1','DHS','CME']} },
+{ path: 'welcome', component: HomeComponent, canActivate: [RouteGuardService],data: { allowedRoles: ['SEC1','DHS','CME','Collector']} },
   // {path:'autocomplete',component:AutocompleteComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
   // {path:'input',component:InputComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
-  {path:'card',component:CardComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1']} },
+  {path:'card',component:CardComponent,canActivate:[RouteGuardService], data: { allowedRoles: ['SEC1','Collector']} },
   // {path:'slider',component:SliderComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
   // {path:'table',component:TableComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
   {path:'form',component:FormdesignComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
@@ -128,7 +137,7 @@ const routes: Routes = [
 {path:'noc',component:NOCComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
 {path:'iwhPending',component:IwhPendingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
 {path:'qc-lab-send',component:QCLabSendComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
-{path:'distribution',component:DistributionComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS','CME']} },
+// {path:'distribution',component:DistributionComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS','CME','Collector']} },
 {path:'qc-dash',component:QcDasboardLabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
 {path:'vehicleTracking',component:VehicleTrackingComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','Warehouse']} },
 {path:'intransitIssues',component:InTransitIssuesComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['Warehouse']} },
@@ -139,11 +148,19 @@ const routes: Routes = [
 {path:'DdlItemWiseInHandQty',component:DdlItemWiseInHandQtyComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
 {path:'DistFACwiseStockPostionNew',component:DistFACwiseStockPostionNewComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
 {path:'SeasonDrugs',component:SeasonDrugsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1','DHS']} },
-{path:'WarehouseInfo',component:WarehouseInfoComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
-{path:'FacCoverage',component:FacCoverageComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'WarehouseInfo',component:WarehouseInfoComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS','Collector']} },
+{path:'FacCoverage',component:FacCoverageComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS','Collector']} },
 {path:'StockSummaryBalanceIndent',component:StockSummaryBalanceIndentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 {path:'timetakenBySupplier',component:TimeTakenBySupplierComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 {path:'PaidTimeTaken',component:PaidTimeTakenComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+// {path:'QcTimeTaken',component:QCTimeTakenYearwiseComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'QcTimeTaken',component:QCTimeTabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'StockoutSummary',component:StockoutSummaryComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'HODYearWiseIssuance',component:HODYearWiseIssuanceComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['Collector']} },
+// {path:'GrowthInProcurment',component:GrowthInProcurmentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'GrowthInProcurment',component:GrowthInProcurmentTabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'distribution',component:DistributionTabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+// {path:'DirectorateAIDetails',component:DirectorateAIDetailsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 
 
 

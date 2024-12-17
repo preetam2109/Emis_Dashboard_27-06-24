@@ -6,28 +6,74 @@
     <mat-tab label="Dashboard">
       <ng-template matTabContent>
         <div *ngIf="selectedTabIndex === 0" class="row">
-          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <mat-card class="card-class mat-card mat-focus-indicator" style="background-color: #C1F666;">
-              <mat-card-header class="mat-card-header">
-                <mat-icon role="img" mat-card-avatar class="mat-icon notranslate mat-card-avatar material-icons mat-icon-no-color" style="color: red; size: 10px; "  aria-hidden="true">medical_services</mat-icon>
-                <div class="mat-card-header-text">
-                  <mat-card-title class="mat-card-title">1328</mat-card-title>
-                  <mat-card-subtitle class="mat-card-subtitle">Total Facility</mat-card-subtitle>
-                </div>
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let district of districtData">
+            <mat-card class="card-class mat-card mat-focus-indicator" style="background-color: #28a745; color: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+              <!-- Icon and Title Section -->
+              <mat-card-header class="mat-card-header" style="background-color: #28a745; border-bottom: none; text-align: center;">
+                <mat-icon 
+                  role="img" 
+                  mat-card-avatar 
+                  class="mat-icon notranslate mat-card-avatar material-icons mat-icon-no-color" 
+                  style="font-size: 40px; color: white;" 
+                  aria-hidden="true">
+                  medical_services
+                </mat-icon>
               </mat-card-header>
+          
+              <div style="text-align: center; margin-top: -20px;">
+                <h5 style="font-size: 20px; font-weight: bold;">Total Facility - {{ district.districtname }}</h5>
+              </div>
+          
+              <!-- Data Section -->
+              <mat-card-content style="padding: 20px;">
+                <div class="d-flex justify-content-between px-3">
+                  <span style="font-size: 16px;">EDL</span>
+                  <span style="font-weight: bold; font-size: 16px;">{{ district.edl }}</span>
+                </div>
+                <div class="d-flex justify-content-between px-3 mt-2">
+                  <span style="font-size: 16px;">NEDL</span>
+                  <span style="font-weight: bold; font-size: 16px;">{{ district.nedl }}</span>
+                </div>
+                <div class="d-flex justify-content-between px-3 mt-2">
+                  <span style="font-size: 16px;">Total</span>
+                  <span style="font-weight: bold; font-size: 16px;">{{ district.total }}</span>
+                </div>
+              </mat-card-content>
             </mat-card>
           </div>
-          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <mat-card class="card-class mat-card mat-focus-indicator" style="background-color:#CDD7B6;">
+          
+          
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let wHDrugCount of wHDrugCount">
+            <mat-card class="card-class mat-card mat-focus-indicator" style="background-color: #E8F5E9;">
               <mat-card-header class="mat-card-header">
-                <mat-icon role="img" mat-card-avatar class="mat-icon notranslate mat-card-avatar material-icons mat-icon-no-color" style="color: green;" aria-hidden="true">warehouse</mat-icon>
-                <div class="mat-card-header-text">
-                  <mat-card-title class="mat-card-title">16</mat-card-title>
-                  <mat-card-subtitle class="mat-card-subtitle">Total Warehouse</mat-card-subtitle>
-                </div>
+                <mat-icon role="img" mat-card-avatar class="mat-icon notranslate mat-card-avatar material-icons mat-icon-no-color" 
+                  style="color: green; font-size: 24px;" aria-hidden="true">
+                  location_city
+                </mat-icon>
+                <!-- <div class="mat-card-header-text">
+                  <mat-card-title class="mat-card-title">Dhamtari</mat-card-title>
+                  <mat-card-subtitle class="mat-card-subtitle">Warehouse</mat-card-subtitle>
+                </div> -->
               </mat-card-header>
+
+              <div style="text-align: center; margin-top: -20px;">
+                <h5 style="font-size: 20px; font-weight: bold;">Warehouse - {{ wHDrugCount.warehousename }}</h5>
+              </div>
+              <mat-card-content style="padding: 20px;">
+                <div class="d-flex justify-content-between px-3">
+                  <span style="font-size: 16px;">EDL</span>
+                  <span style="font-weight: bold; font-size: 16px;">{{ wHDrugCount.edl }}</span>
+                </div>
+                <div class="d-flex justify-content-between px-3 mt-2">
+                  <span style="font-size: 16px;">NEDL</span>
+                  <span style="font-weight: bold; font-size: 16px;">{{ wHDrugCount.nedl }}</span>
+                </div>
+               
+              </mat-card-content>
             </mat-card>
           </div>
+
+          
           <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <mat-card class="card-class mat-card mat-focus-indicator" style="background-color: #74ec3c;">
               <mat-card-header class="mat-card-header">

@@ -27,6 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { FormsModule } from '@angular/forms';
+import { style } from '@angular/animations';
+import { color } from 'html2canvas/dist/types/css/types/color';
 
 
 
@@ -58,14 +60,16 @@ export class PaidTimeTakenComponent {
   whidMap: { [key: string]: number } = {};
   mcid=0
   hodid = 0;
-  selectedCategory: string = 'All'; 
+  selectedCategory: string = ''; 
   OnChangeTitle:string= 'Category'
   // Average Time Taken for Supplies: 
   selectedCategoryTitle: string = '';
   selectedTabIndex: number = 0;
+  hodname:string=''
   QCRequired:string='Y'
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -89,16 +93,39 @@ export class PaidTimeTakenComponent {
         },
       },
       xaxis: {
-        categories: [],
+        categories:{
+          // color:'#d90429'
+        },
+        labels:{
+          style:{
+            colors:'#390099',
+            fontWeight:'bold',
+            fontSize:'30px'
+          }
+        },
+
+        title: {
+          text: 'Year',
+
+        },
+
+        
         
         
       },
       yaxis: {
         
         title: {
-          text: undefined,
+          text: 'No of Days Taken' ,
+          style:{
+            color:'#d90429'
+          }
         },
         labels:{
+          style:{
+          fontWeight:'bold',
+          fontSize:'15px'
+          },
           formatter: function (value) {
             return value.toFixed(0); // This will show the values without decimals
           }
@@ -111,7 +138,7 @@ export class PaidTimeTakenComponent {
       dataLabels: {
         enabled: true,
         style: {
-          // colors: ['#FF0000'] 
+          colors: ['#000814'] 
         }
       },
       stroke: {
@@ -124,7 +151,7 @@ export class PaidTimeTakenComponent {
         style: {
           fontWeight:'bold',
           fontSize: '16px',
-          color:'#FF3C00'
+          color:'rgb(50, 50, 164)'
         },
       },
       tooltip: {
@@ -141,11 +168,12 @@ export class PaidTimeTakenComponent {
         position: 'right',
         horizontalAlign: 'center',
         offsetX: 40,
+        fontWeight:'bold'
       },
     };
 
     
-    this.loadData(this.mcid,this.hodid,this.QCRequired);
+    this.loadData(this.mcid,this.hodid,this.QCRequired,this.hodname);
     // this.loadDataDHS(this.mcid,this.hodid);
     // this.loadDataDME(this.mcid,this.hodid);
     // this.loadDataAYUSH(this.mcid,this.hodid);
@@ -156,8 +184,8 @@ export class PaidTimeTakenComponent {
   
 
   ngOnInit() {
-    
-    this.loadData(this.mcid, this.hodid,this.QCRequired);
+    console.log('Initial hodname:', this.hodname);
+    // this.loadData(this.mcid, this.hodid,this.QCRequired,this.hodname);
   }
 
   
@@ -184,22 +212,28 @@ export class PaidTimeTakenComponent {
     // Map the selected category to the corresponding mcid value
     if (this.selectedCategory==='Drugs') {
       this.mcid = 1;
-      this.chartOptions.title.text = this.OnChangeTitle +':'+  this.selectedCategory;
+      this.chartOptions.title.text = this.OnChangeTitle +':'+  this.selectedCategory+ ',Directorate: '+this.hodname;
     } else if (this.selectedCategory==='Consumables') {
       this.mcid = 2;
-      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory;
-    } else if(this.selectedCategory==='All'){
+      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory+ ' ,Directorate: '+this.hodname;
+    } else if(this.selectedCategory==='All Category'){
 
       this.mcid = 0;
-      this.chartOptions.title.text = this.OnChangeTitle+':'+ this.selectedCategory;
+      this.chartOptions.title.text = this.OnChangeTitle+':'+ this.selectedCategory+ ' ,Directorate: '+this.hodname;
+
+    }
+    else if(this.selectedCategory==='All'){
+
+      this.mcid = 0;
+      this.chartOptions.title.text = this.OnChangeTitle+':'+ this.selectedCategory+ ' ,Directorate: '+this.hodname;
 
     }
     else if (this.selectedCategory==='Reagent') {
       this.mcid = 3;
-      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory;
+      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory+ ', Directorate: '+this.hodname;
     } else if (this.selectedCategory==='AYUSH') {
       this.mcid = 4;
-      this.chartOptions.title.text =this.OnChangeTitle +':'+    this.selectedCategory;
+      this.chartOptions.title.text =this.OnChangeTitle +':'+ this.selectedCategory+ ', Directorate: '+this.hodname;
     }
 
     // console.log('Selected Hod ID:', this.mcid);
@@ -219,15 +253,20 @@ export class PaidTimeTakenComponent {
   //   }
   // }
 
-  loadData(mcid:any,hodid:any,QCRequired:any): void {
+  loadData(mcid:any,hodid:any,QCRequired:any,hodname:string): void {
+    
+this.hodname=hodname;
     this.QCRequired=QCRequired
-    debugger
+    
+      this.updateSelectedHodid()
+    
+    
     this.spinner.show();
     this.api.getPaidTimeTaken(mcid,hodid,this.QCRequired).subscribe(
       (data:any) => {
         const yr: string[] = [];
         const avgdayssincerec: number[] = [];
-        const avgdayssinceQC: number[] = [];
+        const avgdayssinceqc: number[] = [];
         console.log('API Response:', data);
 
 
@@ -235,7 +274,7 @@ export class PaidTimeTakenComponent {
            
           yr.push(item.yr);
           avgdayssincerec.push(item.avgdayssincerec);
-          avgdayssinceQC.push(item.avgdayssinceQC);
+          avgdayssinceqc.push(item.avgdayssinceqc);
          
 
           // console.log('yr:', item.yr, 'delayparA1:', item.delayparA1);
@@ -253,22 +292,34 @@ export class PaidTimeTakenComponent {
 
            
           { 
-            name: 'avgdayssincerec',
-            data: avgdayssincerec ,
-            color:'#ff0054'
-
+            name: 'Since QC Passed ', 
+            data: avgdayssinceqc,
+             color:'#006400'
           },
           { 
-            name: 'avgdayssinceQC', 
-            data: avgdayssinceQC,
-             color:'#00008B'
+            name: 'Since Received in Warehouse',
+            data: avgdayssincerec ,
+            color:'#fb8500'
+
           }
 
 
           
         ];
 
-        this.chartOptions.xaxis = {categories: yr};
+        this.chartOptions.xaxis = {
+          categories: yr,
+          labels:{
+            style:{
+              // colors:'#390099',
+              fontWeight:'bold',
+              fontSize:'15px'
+            }
+          }
+          
+
+          
+         };
         this.cO = this.chartOptions;
         this.cdr.detectChanges();
         this.spinner.hide();
@@ -281,6 +332,7 @@ export class PaidTimeTakenComponent {
   }
 
   loadDataDHS(mcid:any,hodid:any,QCRequired:any): void {
+    
     this.QCRequired=QCRequired
     //  let wheretitle=this.updateSelectedCategory();
     // this.updateSelectedCategory('DHS');
@@ -291,16 +343,16 @@ export class PaidTimeTakenComponent {
     this.api.getPaidTimeTaken(mcid,hodid,this.QCRequired).subscribe(
       (data: any) => {
         const yr: string[] = [];
-        const dhsissueitems: number[] = [];
-        const dhsissuevalue: number[] = [];
+        const avgdayssincerec: number[] = [];
+        const avgdayssinceqc: number[] = [];
         console.log('API Response:', data);
 
 
         data.forEach((item:any)=> {
            
           yr.push(item.yr);
-          dhsissueitems.push(item.dhsissueitems);
-          dhsissuevalue.push(item.dhsissuevalue);
+          avgdayssincerec.push(item.avgdayssincerec);
+          avgdayssinceqc.push(item.avgdayssinceqc);
 
           // console.log('yr:', item.yr, 'delayparA1:', item.delayparA1);
           // if (item.delaypara && item.delayparA1) {
@@ -317,23 +369,25 @@ export class PaidTimeTakenComponent {
 
            
           { 
-            name: ' DHS Issued Items', 
-            data: dhsissueitems ,
-            color:'#800000'
+            name: 'Since QC Passed ',
+            data: avgdayssinceqc ,
+            color:'#006400'
+
+
           },
-
-
           { 
-            name: ' DHS Issued Value',
-            data: dhsissuevalue ,
-            color:'#00008B'
-
-
+            name: 'Since Received in Warehouse', 
+            data: avgdayssincerec ,
+            color:'#fb8500'
           }
+
+
           
         ];
 
-        this.chartOptions.xaxis = {categories: yr};
+        this.chartOptions.xaxis = {categories: yr,
+          
+        };
         this.cO = this.chartOptions;
         this.cdr.detectChanges();
         this.spinner.hide();
@@ -345,7 +399,7 @@ export class PaidTimeTakenComponent {
     );
   }
   loadDataDME(mcid:any,hodid:any): void {
-    debugger
+    
     // this.updateSelectedCategory('DME');
     this.spinner.show();
     this.api.getPaidTimeTaken(mcid,hodid,this.QCRequired).subscribe(
@@ -379,14 +433,14 @@ export class PaidTimeTakenComponent {
           { 
             name: ' DME Items', 
             data: dmeissueitems,
-            color:'#800000' 
+            color:'#fb8500' 
           },
 
 
           { 
             name: ' DME Value',
             data: dmeissuevalue ,
-            color:'#00008B'
+            color:'#006400'
 
           }
           
@@ -438,7 +492,7 @@ export class PaidTimeTakenComponent {
           { 
             name: ' AYUSH Issued Items', 
             data: ayIssueitems ,
-            color:'#800000'
+            color:'#fb8500'
 
           },
 
@@ -446,7 +500,7 @@ export class PaidTimeTakenComponent {
           { 
             name: ' AYUSH Issued Value',
             data: ayissueval ,
-            color:'#00008B'
+            color:'#006400'
 
           }
           

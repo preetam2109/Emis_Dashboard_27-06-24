@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableExporterModule } from 'mat-table-exporter';
-
 @Component({
   selector: 'app-warehouse-info',
   standalone: true,
@@ -67,7 +66,7 @@ export class WarehouseInfoComponent implements OnInit {
    */
   GetWarehouseInfo() {
     this.spinner.show();
-    this.api.getWarehouseInfo().subscribe(
+    this.api.getWarehouseInfo(0).subscribe(
       (res) => {
         // Map API response and calculate parsed warehouse positions
         this.warehouseInfo = res.map((item: any, index: number) => ({
@@ -95,8 +94,8 @@ export class WarehouseInfoComponent implements OnInit {
   }
 
   fetchWarehouseInfo() {
-    debugger
-    this.api.getWarehouseInfo().subscribe((res) => {
+    
+    this.api.getWarehouseInfo(0).subscribe((res) => {
       this.warehouseInfo = res.map((item: any) => ({
         ...item,
         position: {

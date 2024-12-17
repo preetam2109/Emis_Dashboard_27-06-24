@@ -1,38 +1,43 @@
 <div class="container-fluid py-4">
-    <div class="container" style="text-align: center; max-width: 100%; overflow-x: auto;">
-      <h1 style="color: rgb(50, 50, 164);" > <strong> CGMSC Warehouse Coverage</strong></h1>
-    </div>
+  <div class="container text-center">
+    <h1 style="color: rgb(50, 50, 164);"><strong>CGMSC Warehouse Coverage</strong></h1>
+  </div>
 
+  <div class="map-container" style="width: 1228px; height: 600px;" >
+  
+  <!-- <div style="width: 1228px; height: 600px;" > -->
 
-    <div >
-      <google-map [center]="center" [zoom]="zoom" style="height: 100%; width: 100%;">
-        <map-marker
-          *ngFor="let warehouse of warehouseInfo"
-          [position]="warehouse.position"
-          [title]="warehouse.warehousename"
-          #marker="mapMarker" 
-          (mapClick)="onMarkerClick(warehouse, marker)"
-        ></map-marker>
+    <google-map
+    
+      [center]="center"
+      [zoom]="zoom"
+
       
-        <map-info-window>
-          <h3>{{ selectedWarehouse?.warehousename }}</h3>
-          <p><strong>Address:</strong> {{ selectedWarehouse?.address }}</p>
-          <p><strong>Email:</strong> {{ selectedWarehouse?.email }}</p>
-          <p><strong>Number of Facilities:</strong> {{ selectedWarehouse?.nosfac }}</p>
-          <p><strong>Contact:</strong> {{ selectedWarehouse?.moB1 }}</p>
-        </map-info-window>
-      </google-map>
       
-    </div>
-    
-    
-    
-    
-    
+    >
+      <map-marker
+        *ngFor="let warehouse of warehouseInfo"
+        [position]="warehouse.position"
+        [title]="warehouse.warehousename"
+        #marker="mapMarker"
+        (mapClick)="onMarkerClick(warehouse, marker)"
+      ></map-marker>
 
-    
+      <map-info-window>
+        <h3>{{ selectedWarehouse?.warehousename }}</h3>
+        <p><strong>Address:</strong> {{ selectedWarehouse?.address }}</p>
+        <p><strong>Email:</strong> {{ selectedWarehouse?.email }}</p>
+        <p><strong>Number of Facilities:</strong> {{ selectedWarehouse?.nosfac }}</p>
+        <p><strong>Contact:</strong> {{ selectedWarehouse?.moB1 }}</p>
+      </map-info-window>
+    </google-map>
+  </div>
 
-   
+  </div>
+<!-- </div> -->
+  
+
+<!--    
      <div class="row">
       <div class="col-lg-12 col-md-12 table-container mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -116,6 +121,6 @@
           </div>
         <mat-paginator [pageSizeOptions]="[10, 15, 30]" showFirstLastButtons></mat-paginator>
       </div>
-    </div> 
-  </div>
+    </div>  -->
+ 
   

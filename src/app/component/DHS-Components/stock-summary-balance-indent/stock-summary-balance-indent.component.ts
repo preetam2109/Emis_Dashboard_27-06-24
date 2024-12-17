@@ -206,7 +206,7 @@ export class StockSummaryBalanceIndentComponent {
   }
 
   loadData(yearid:any) {
-    debugger
+    
     this.yearid=yearid;
     
     this.spinner.show();
@@ -242,7 +242,7 @@ export class StockSummaryBalanceIndentComponent {
     
   }
   navigateToDetails(btypeorder: number,btype:string) {
-    debugger
+    
     this.orderid=btypeorder
     this.btype=btype
     
@@ -270,7 +270,7 @@ export class StockSummaryBalanceIndentComponent {
  
     getStockSummaryBalanceIndentDetails() {
 
-    debugger
+    
     this.spinner.show();
     this.api.getStockSummaryBalanceIndentDetails(this.yearid,this.mcid,this.orderid).subscribe(
       (res) => {
@@ -389,7 +389,7 @@ export class StockSummaryBalanceIndentComponent {
   
   
   updateSelectedHodid(): void {
-      debugger
+      
     
     // Reset hodid to 0 initially
     this.mcid = 0;

@@ -58,6 +58,7 @@ export class TimeTakenBySupplierComponent {
   whidMap: { [key: string]: number } = {};
   mcid=0
   hodid = 0;
+  duration = 0;
   selectedCategory: string = 'All'; 
   OnChangeTitle:string= 'Category'
   // Average Time Taken for Supplies: 
@@ -123,7 +124,7 @@ export class TimeTakenBySupplierComponent {
         style: {
           fontWeight:'bold',
           fontSize: '16px',
-          color:'#FF3C00'
+          color:'rgb(50, 50, 164)'
         },
       },
       tooltip: {
@@ -183,22 +184,22 @@ export class TimeTakenBySupplierComponent {
     // Map the selected category to the corresponding mcid value
     if (this.selectedCategory==='Drugs') {
       this.mcid = 1;
-      this.chartOptions.title.text = this.OnChangeTitle +':'+  this.selectedCategory;
+      this.chartOptions.title.text = this.OnChangeTitle +':'+  this.selectedCategory+',  Minimum Supply Days:'+this.duration;
     } else if (this.selectedCategory==='Consumables') {
       this.mcid = 2;
-      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory;
+      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory+',   Minimum Supply Days:'+this.duration;
     } else if(this.selectedCategory==='All'){
 
       this.mcid = 0;
-      this.chartOptions.title.text = this.OnChangeTitle+':'+ this.selectedCategory;
+      this.chartOptions.title.text = this.OnChangeTitle+':'+ this.selectedCategory+',   Minimum Supply Days:'+this.duration;
 
     }
     else if (this.selectedCategory==='Reagent') {
       this.mcid = 3;
-      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory;
+      this.chartOptions.title.text = this.OnChangeTitle +':'+ this.selectedCategory+ ',  Minimum Supply Days:'+this.duration;
     } else if (this.selectedCategory==='AYUSH') {
       this.mcid = 4;
-      this.chartOptions.title.text =this.OnChangeTitle +':'+    this.selectedCategory;
+      this.chartOptions.title.text =this.OnChangeTitle +':'+    this.selectedCategory+',  Minimum Supply Days:'+this.duration;
     }
 
     // console.log('Selected Hod ID:', this.mcid);
@@ -220,6 +221,8 @@ export class TimeTakenBySupplierComponent {
 
   loadData(mcid:any,hodid:any): void {
     
+    this.duration=mcid;
+    this.updateSelectedHodid()
     this.spinner.show();
     this.api.getPOSuppyTimeTakenYear(hodid,mcid,0).subscribe(
       (data:any) => {
@@ -289,16 +292,16 @@ export class TimeTakenBySupplierComponent {
     this.api.getPOSuppyTimeTakenYear(hodid,mcid,0).subscribe(
       (data: any) => {
         const accyear: string[] = [];
-        const dhsissueitems: number[] = [];
-        const dhsissuevalue: number[] = [];
+        const nositems: number[] = [];
+        const timetakenSupply: number[] = [];
         console.log('API Response:', data);
 
 
         data.forEach((item:any)=> {
            
           accyear.push(item.accyear);
-          dhsissueitems.push(item.dhsissueitems);
-          dhsissuevalue.push(item.dhsissuevalue);
+          nositems.push(item.nositems);
+          timetakenSupply.push(item.timetakenSupply);
 
           // console.log('accyear:', item.accyear, 'delayparA1:', item.delayparA1);
           // if (item.delaypara && item.delayparA1) {
@@ -315,18 +318,9 @@ export class TimeTakenBySupplierComponent {
 
            
           { 
-            name: ' DHS Issued Items', 
-            data: dhsissueitems ,
-            color:'#800000'
-          },
-
-
-          { 
-            name: ' DHS Issued Value',
-            data: dhsissuevalue ,
-            color:'#00008B'
-
-
+            name: 'Time Taken to Supply', 
+            data: timetakenSupply,
+             color:'#00008B'
           }
           
         ];
@@ -343,22 +337,22 @@ export class TimeTakenBySupplierComponent {
     );
   }
   loadDataDME(mcid:any,hodid:any): void {
-    debugger
+    
     // this.updateSelectedCategory('DME');
     this.spinner.show();
     this.api.getPOSuppyTimeTakenYear(hodid,mcid,0).subscribe(
       (data: any) => {
         const accyear: string[] = [];
-        const dmeissueitems: number[] = [];
-        const dmeissuevalue: number[] = [];
+        const nositems: number[] = [];
+        const timetakenSupply: number[] = [];
         // console.log('API Response:', data);
 
 
         data.forEach((item:any)=> {
            
           accyear.push(item.accyear);
-          dmeissueitems.push(item.dmeissueitems);
-          dmeissuevalue.push(item.dmeissuevalue);
+          nositems.push(item.nositems);
+          timetakenSupply.push(item.timetakenSupply);
 
           // console.log('accyear:', item.accyear, 'delayparA1:', item.delayparA1);
           // if (item.delaypara && item.delayparA1) {
@@ -375,17 +369,9 @@ export class TimeTakenBySupplierComponent {
 
            
           { 
-            name: ' DME Items', 
-            data: dmeissueitems,
-            color:'#800000' 
-          },
-
-
-          { 
-            name: ' DME Value',
-            data: dmeissuevalue ,
-            color:'#00008B'
-
+            name: 'Time Taken to Supply', 
+            data: timetakenSupply,
+             color:'#00008B'
           }
           
         ];
@@ -408,16 +394,16 @@ export class TimeTakenBySupplierComponent {
     this.api.getPOSuppyTimeTakenYear(hodid,mcid,0).subscribe(
       (data: any) => {
         const accyear: string[] = [];
-        const ayIssueitems: number[] = [];
-        const ayissueval: number[] = [];
+        const nositems: number[] = [];
+        const timetakenSupply: number[] = [];
         // console.log('API Response:', data);
 
 
         data.forEach((item:any)=> {
            
           accyear.push(item.accyear);
-          ayIssueitems.push(item.ayIssueitems);
-          ayissueval.push(item.ayissueval);
+          nositems.push(item.nositems);
+          timetakenSupply.push(item.timetakenSupply);
 
           // console.log('accyear:', item.accyear, 'delayparA1:', item.delayparA1);
           // if (item.delaypara && item.delayparA1) {
@@ -434,18 +420,9 @@ export class TimeTakenBySupplierComponent {
 
            
           { 
-            name: ' AYUSH Issued Items', 
-            data: ayIssueitems ,
-            color:'#800000'
-
-          },
-
-
-          { 
-            name: ' AYUSH Issued Value',
-            data: ayissueval ,
-            color:'#00008B'
-
+            name: 'Time Taken to Supply', 
+            data: timetakenSupply,
+             color:'#00008B'
           }
           
         ];

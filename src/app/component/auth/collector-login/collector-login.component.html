@@ -1,0 +1,156 @@
+<div class="container-fluid vh-100 d-flex flex-column"
+    style="background-image: url('assets/images/login-background.png'); background-size: cover; background-position: center;">
+   
+    <header class="header bs-body-bg text-white py-3" style="background-color:#006ADC; border: 2px solid;">
+
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="https://seeklogo.com/images/C/chhattisgarh-govt-logo-CDE4C0558C-seeklogo.com.png" alt="Left Logo" class="header-logo">
+            <div class="header-title text-center">
+                <h1 class="cgmsctitle" style="font-size: x-large;" ><strong style="color: #f5f8f5;">छत्तीसगढ़ औषधि दर्पण</strong></h1>
+                <p class="collector-title"><strong style="color:rgb(246, 246, 246) ; font-size: x-large;">District Collector Dashboard</strong></p>
+
+                <p class="sub-title "><strong style="color: #fbfcfa;">An Initiative By CGMSC For Strengthening of Drugs Supply Chain and Infrastructure </strong>
+                </p>
+            </div>
+            <img src="assets/images/cgmsc-logo.png" alt="Right Logo" class="header-logo">
+        </div>
+    </header>
+
+
+
+    <!-- Main Content Section -->
+
+
+
+    <main class="d-flex flex-grow-1">
+        <div class="container">
+            <div class="row">
+                <!-- Right Side: Login Section -->
+                <div class="col-md-4 order-1 order-md-2 d-flex align-items-start">
+                    <div class="card w-100">
+                        <div class="card-header" style="background-color:#006ADC; color: #f4f0f0; text-align: center;">
+                            <strong>District Login</strong>
+                        </div>
+                        <div class="card-body">
+                            <form (ngSubmit)="handleLogin()">
+                               
+                              <div class="mb-3">
+                                <label for="districtSelect" class="form-label">Select District</label>
+                                <select 
+                                  id="districtSelect" 
+                                  class="form-select" 
+                                  [(ngModel)]="selectedDistrictId" 
+                                  name="districts" 
+                                  required>
+                                  <option value="" disabled selected>Select a district</option>
+                                  <option *ngFor="let district of districts" [value]="district.emailid">
+                                    {{ district.distname }}
+                                  </option>
+                                </select>
+                              </div>
+                              <!-- <p>Selected District ID: {{ selectedDistrictId }}</p> -->
+                              
+                              
+                                  
+        
+                                <!-- Password Input -->
+                                <div class="mb-3 position-relative">
+                                    <label for="pwd" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="pwd" name="pwd" [(ngModel)]="pwd"   required>
+                                    <i class="fa fa-eye" style="position: absolute; right: 10px; top: 38px; cursor: pointer;"></i>
+                                </div>
+        
+                                <!-- Remember Me Checkbox -->
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+        
+                                <!-- Login Button -->
+                                <div class="d-flex flex-column align-items-center">
+                                    <button type="submit" class="btn btn-primary"  >Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+             
+        
+                <!-- Left Side: Tabs Section -->
+                <div class="col-md-8 order-2 order-md-1">
+                    <!-- Tabs Navigation -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tutorials-tab" data-bs-toggle="tab" href="#tutorials" role="tab" aria-controls="tutorials" aria-selected="false">Orders/Circulars</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="manuals-tab" data-bs-toggle="tab" href="#manuals" role="tab" aria-controls="manuals" aria-selected="false">User Manuals</a>
+                        </li>
+                    </ul>
+        
+                    <!-- Tabs Content -->
+                    <div class="tab-content mt-3" id="myTabContent">
+                    <!-- <div class="tab-content mt-3 p-2 w-75 h-50 overflow-auto border" id="myTabContent"> -->
+                            <!-- Your tab content goes here -->
+                          
+                        <!-- About Tab -->
+                        <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                            <div class="card">
+                                <div class="card-header" style="background-color: #006ADC; color: #f4f0f0;">
+                                    <strong>About</strong>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+
+                                        <p>
+                                            The Ayushman Arogya Mandir (AAM) DPDMIS Portal, developed by Chhattisgarh Medical Services Corporation Limited (CGMSCL), aims to transform the supply, distribution, tracking, and consumption...
+                                            <span *ngIf="!showFullText">... <a href="javascript:void(0)" (click)="toggleText()">Read More</a></span>
+                                            <span *ngIf="showFullText">
+                                                This will help to analyze the availability of essential drugs and ensure accurate stock at the AAM/SHC level...
+                                                <a href="javascript:void(0)" (click)="toggleText()">Read Less</a>
+                                            </span>
+                                        </p>
+                                    </div>
+  
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ <!-- New Center Card -->
+ <div class="card mt-4" style="width: 40%;">
+    <div class="card-header text-center" style="background-color: #006ADC; color: #f4f0f0;">
+        <strong>Centralized Information</strong>
+    </div>
+    <div class="card-body text-center">
+        <p>This card contains important notices, district-specific updates, and announcements for the Collector.</p>
+        <button class="btn btn-primary">Learn More</button>
+    </div>
+</div>
+
+
+                </div>
+            </div>
+        <!-- </div> -->
+        
+        
+       
+    </div>
+</main>
+    
+    
+    
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white py-3">
+        <div class="container text-center">
+            <p class="mb-0 small">Designed & Developed by IT-Cell CGMSCL | © 2024</p>
+        </div>
+    </footer>
+</div>

@@ -1,11 +1,11 @@
 <div class="container mt-3">
-    <h1 style="color: rgb(50, 50, 164); margin-bottom: 20px;" > <strong>Paid Time Taken </strong></h1>
+    <h1 style="color: rgb(50, 50, 164); margin-bottom: 20px;" > <strong>Average Time Taken Days for Payement </strong></h1>
   <div class="row mb-3">
     <div class="col-md-6 d-flex flex-wrap">
       <div class="form-check me-3">
         <input class="form-check-input" type="radio" name="categoryGroup" id="all" [(ngModel)]="selectedCategory"
           value="All" (change)="updateSelectedHodid()"  />
-        <label class="form-check-label" for="all">All</label>
+        <label class="form-check-label" for="all">All Category</label>
       </div>
       <div class="form-check me-3">
         <input class="form-check-input" type="radio" name="categoryGroup" id="drugs" [(ngModel)]="selectedCategory"
@@ -31,20 +31,54 @@
   </div>
 
 
-    <div class="row mb-3 text-center">
-      <div class="col-md-3">
-        <button class="btn btn-primary w-100" (click)="loadData(0, 0,QCRequired)">Y</button>
+  <div class="row mb-3">
+    <div class="col-md-6 d-flex flex-wrap">
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" name="QCGroup" id="Y" [(ngModel)]="QCRequired"
+          value="Y"/>
+        <label class="form-check-label" for="Y">Required QC Test</label>
       </div>
-      <div class="col-md-3">
-        <button class="btn btn-secondary w-100" (click)="loadDataDHS(0,0,QCRequired)">N</button>
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" name="QCGroup" id="N" [(ngModel)]="QCRequired"
+          value="N" />
+        <label class="form-check-label" for="N">Not Required QC Test</label>
       </div>
-      <!-- <div class="col-md-3">
-        <button class="btn btn-secondary w-100" (click)="loadDataDME(75, mcid)">75 Days</button>
-      </div>
-      <div class="col-md-3">
-        <button class="btn btn-secondary w-100" (click)="loadDataAYUSH(90, mcid)">90 Days</button>
-      </div> -->
     </div>
+  </div>
+
+
+
+  <div class="row mb-3 text-center">
+    <div class="col-md-3">
+      <button class="btn btn-outline-success w-100" 
+              (click)="loadData(mcid, 0, QCRequired, 'All')" 
+              [ngClass]="{'Active': hodname === 'All'}">
+        All HOD
+      </button>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-outline-info w-100" 
+              (click)="loadData(mcid, 367, QCRequired, 'DHS')" 
+              [ngClass]="{'Active': hodname === 'DHS'}">
+        DHS
+      </button>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-outline-primary w-100" 
+              (click)="loadData(mcid, 364, QCRequired, 'DME')" 
+              [ngClass]="{'Active': hodname === 'DME'}">
+        DME
+      </button>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-outline-secondary w-100" 
+              (click)="loadData(mcid, 371, QCRequired, 'AYUSH')" 
+              [ngClass]="{'Active': hodname === 'AYUSH'}">
+        AYUSH
+      </button>
+    </div>
+  </div>
+  
 
     <div class="row">
       <div class="col-12">

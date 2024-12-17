@@ -17,7 +17,8 @@ import {
   ApexYAxis,
   ApexTooltip,
   ApexFill,
-  ApexLegend
+  ApexLegend,
+  NgApexchartsModule
 } from 'ng-apexcharts';
 import { dispatchPending } from 'src/app/Model/dispatchPending';
 import { DistrictService } from 'src/app/service/district.service';
@@ -31,6 +32,7 @@ import { IWHPiplineSummary } from 'src/app/Model/IWHPiplineSummary';
 import { IWHPiplineDetails } from 'src/app/Model/IWHPiplineDetails';
 import { LabIssuePendingDetails } from 'src/app/Model/LabIssuePendingDetails';
 import { HODYearWiseIssuanceSummary } from 'src/app/Model/HODYearWiseIssuanceSummary';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -49,6 +51,8 @@ export type ChartOptions = {
 };
 @Component({
   selector: 'app-distribution',
+  standalone:true,
+  imports:[FormsModule,NgApexchartsModule],
   templateUrl: './distribution.component.html',
   styleUrls: ['./distribution.component.css']
 })
@@ -59,6 +63,8 @@ export class DistributionComponent {
   whidMap: { [key: string]: number } = {};
   mcid=1
   hodid = 0;
+  districtid:any=0
+
   selectedCategory: string = 'Drugs'; 
   OnChangeTitle:string= 'Growth in Disribution Category:' 
   selectedCategoryTitle: string = '';
@@ -155,7 +161,9 @@ export class DistributionComponent {
   
 
   ngOnInit() {
-    
+    if(sessionStorage.getItem('roleId')==='482'){
+      this.districtid=sessionStorage.getItem('districtid')
+    }
     this.loadData(this.mcid, this.hodid);
   }
 
@@ -215,6 +223,9 @@ export class DistributionComponent {
   loadData(mcid:any,hodid:any): void {
     
     this.spinner.show();
+    if(sessionStorage.getItem('roleId')==='482'){
+      this.districtid=sessionStorage.getItem('districtid')
+    }
     this.api.getHODYearWiseIssuanceSummary(mcid,hodid).subscribe(
       (data:any) => {
         const shaccyear: string[] = [];

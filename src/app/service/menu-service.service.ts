@@ -67,12 +67,15 @@ export class MenuServiceService {
           { label: 'Warehouse Information', route: 'WarehouseInfo' },
           { label: 'Stock Abstract', route: 'whStockAbstract' },
           { label: 'DHS Seasonal Drugs', route: 'SeasonDrugs' },
-          { label: 'Growth in Distribution', route: 'distribution' },
+          { label: 'Growth In Procurment', route: 'GrowthInProcurment' },
+          { label: 'Growth in Distribution',route: 'distribution'},
           { label: 'Demand vs Supply', route: 'EdlNonEdlIssuePercentSummary' },
           // { label: 'Issue Per Wise Per Click', route: 'IssuePerWisePerClick' },
           { label: 'DHS Supplied %', route: 'IssuedPerWise' },
           { label: 'DHS Stock Availablity %', route: 'StockSummaryBalanceIndent' },
           { label: 'WH Indent Pending', route: 'IndentPendingWHdash' },
+          { label: 'StockoutSummary', route: 'StockoutSummary' },
+
           { label: 'Near Expiry', route: 'nearExpiry' },
           { label: 'NOC', route: 'noc' },
           { label: 'District EDL Counts', route: 'DistrictWiseStk' },
@@ -84,6 +87,7 @@ export class MenuServiceService {
               submenu: [
                 { label: 'Time Taken By Supplier', route: 'timetakenBySupplier' },
                 { label: 'Paid Time Taken', route: 'PaidTimeTaken' },
+                { label: 'QC Time Taken', route: 'QcTimeTaken' },
                 // { label: 'Facility Details', route: 'facilityDetails' }
 
               ],
@@ -142,6 +146,20 @@ export class MenuServiceService {
         { label: 'In-Transit Issues', route: 'intransitIssues' },
         { label: 'DHS Seasonal Drugs', route: 'SeasonDrugs' },
 
+
+      ],
+    },
+    Collector: {
+      items: [
+        { label: 'Home', route: 'home' },
+        { label: 'Dashboard', route: 'card' },
+        { label: 'Health Facilities Coverage', route: 'FacCoverage' },
+          { label: 'Warehouse Information', route: 'WarehouseInfo' },
+        { label: 'Growth in Distribution', route: 'distribution' },
+        { label: 'HODYearWiseIssuance', route: 'HODYearWiseIssuance' },
+
+
+
       ],
     },
   };
@@ -187,11 +205,12 @@ export class MenuServiceService {
 
   // Example submenu provider (optional)
 getSubmenu(label: string): { label: string; route: string }[] | undefined {
-  debugger
+  
   const submenus:any = {
     'Time-Based Analysis': [
       { label: 'Time Taken By Supplier', route: 'timetakenBySupplier' },
-      { label: 'Paid Time Taken', route: 'PaidTimeTaken' },
+      { label: 'Payement Time Taken', route: 'PaidTimeTaken' },
+      { label: 'QC Time Taken', route: 'QcTimeTaken' },
 
     ],
   };

@@ -78,7 +78,6 @@ import { CgmscstockDetailsReagentComponent } from './component/cgmscstock-detail
 import { CgmscstockDetailsAyushComponent } from './component/cgmscstock-details-ayush/cgmscstock-details-ayush.component';
 import { QCResultsComponent } from './component/qcresults/qcresults.component';
 import { QCLabSendComponent } from './component/qc-lab-send/qc-lab-send.component';
-import { CollectorLoginComponent } from './component/collector-login/collector-login.component';
 import { DistributionComponent } from './component/distribution/distribution.component';
 import { QcDasboardLabComponent } from './component/qc-dasboard-lab/qc-dasboard-lab.component';
 import { QcPendingToPickLabComponent } from './component/qc-pending-to-pick-lab/qc-pending-to-pick-lab.component';
@@ -153,8 +152,7 @@ import { CommonModule } from '@angular/common';
         CgmscstockDetailsAyushComponent,
         QCResultsComponent,
         QCLabSendComponent,
-        CollectorLoginComponent,
-        DistributionComponent,
+        // DistributionComponent,
         QcDasboardLabComponent,
         QcPendingToPickLabComponent,
         VehicleTrackingComponent,

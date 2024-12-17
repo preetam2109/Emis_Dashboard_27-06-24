@@ -59,7 +59,7 @@ export class DdlItemWiseInHandQtyComponent {
   }
 
   onDistrictChange(): void {
-    debugger
+    
     // const selectElement = event.target as HTMLSelectElement;
     // const parsedDistId = parseInt(selectElement.value, 10);
     // this.selectedDistrictId = !isNaN(parsedDistId) ? parsedDistId : null;

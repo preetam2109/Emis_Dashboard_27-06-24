@@ -55,7 +55,7 @@ this.orderdp=params['orderdp']
 
  
   GetSeasonDrugs(season:any) {
-    debugger
+    
     this.season=season
     this.spinner.show();
     this.api.getSeasonDrugs(this.season,0,0,'WH').subscribe(

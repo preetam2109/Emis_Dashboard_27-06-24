@@ -48,7 +48,7 @@ export type ChartOptions = {
   templateUrl: './indent-pending-wh.component.html',
   styleUrls: ['./indent-pending-wh.component.css']
 })
-export class IndentPendingWHComponent {
+export class  IndentPendingWHComponent {
   @ViewChild('chart') chart: ChartComponent | undefined;
   public cO: Partial<ChartOptions> | undefined;
   chartOptions: ChartOptions;
