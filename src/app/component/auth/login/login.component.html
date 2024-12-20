@@ -1,27 +1,69 @@
-<div class="container d-flex justify-content-center align-items-center">
-  <mat-card class="login-card">
-    
-    <mat-card-title class="mat-card-title  text-center text-white" style="margin: -16px; padding: 16px;">Login</mat-card-title>
-    <!-- <h1 class="mat-headline">Login</h1> -->
-    <div class="profile-photo">
-      <img src="https://govthealth.cg.gov.in/health_dashboard/assets/images/user.jpg" > </div>
-
-    <div *ngIf="invalidLogin" class="alert alert-warning">
-      {{errorMessage}}
+<div class="container-fluid d-flex flex-column vh-100">
+  <!-- Header -->
+  <header class="bg-success text-white py-3">
+    <div class="container text-center">
+      <h1>Application Name</h1>
     </div>
+  </header>
 
-    <form (ngSubmit)="handleLogin()">
-      <mat-form-field class="w-100 mt-3">
-        <mat-label>User ID</mat-label>
-        <input matInput type="text" name="emailid" [(ngModel)]="emailid" required>
-      </mat-form-field>
+  <!-- Main Content -->
+  <div class="container d-flex justify-content-end align-items-center flex-grow-1">
+    <div class="card shadow login-card">
+      <div class="card-header bg-success text-white">
+        <ul class="nav nav-tabs card-header-tabs" id="loginTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">
+              Login
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="warehouse-tab" data-bs-toggle="tab" data-bs-target="#warehouse" type="button" role="tab" aria-controls="warehouse" aria-selected="false">
+              Warehouse
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body tab-content" id="loginTabsContent">
+        <!-- Login Tab -->
+        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+          <div class="profile-photo mb-4 text-center">
+            <img src="https://govthealth.cg.gov.in/health_dashboard/assets/images/user.jpg" alt="Profile Photo">
+          </div>
+          <form (ngSubmit)="handleLogin()">
+            <div class="mb-3">
+              <label for="emailid" class="form-label">User ID</label>
+              <input type="text" class="form-control" id="emailid" name="emailid" [(ngModel)]="emailid" required>
+            </div>
+            <div class="mb-3">
+              <label for="pwd" class="form-label">Password</label>
+              <input type="password" class="form-control" id="pwd" name="pwd" [(ngModel)]="pwd" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Login</button>
+          </form>
+        </div>
 
-      <mat-form-field class="w-100 mt-2">
-        <mat-label>pwd</mat-label>
-        <input matInput type="pwd" name="pwd" [(ngModel)]="pwd" required>
-      </mat-form-field>
+        <!-- Warehouse Tab -->
+        <div class="tab-pane fade" id="warehouse" role="tabpanel" aria-labelledby="warehouse-tab">
+          <form (ngSubmit)="handleWarehouseLogin()">
+            <div class="mb-3">
+              <label for="warehouseId" class="form-label">Warehouse ID</label>
+              <input type="text" class="form-control" id="warehouseId" name="warehouseId" [(ngModel)]="warehouseId" required>
+            </div>
+            <div class="mb-3">
+              <label for="warehousePwd" class="form-label">Password</label>
+              <input type="password" class="form-control" id="warehousePwd" name="warehousePwd" [(ngModel)]="warehouseId" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Login to Warehouse</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <button mat-raised-button color="primary" class="mt-3" type="submit">Login</button>
-    </form>
-  </mat-card>
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-3">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2024 Application Name. All Rights Reserved.</p>
+    </div>
+  </footer>
 </div>

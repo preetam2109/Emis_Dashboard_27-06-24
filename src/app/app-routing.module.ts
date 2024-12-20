@@ -72,6 +72,7 @@ import { GrowthInProcurmentComponent } from './component/DHS-Components/growth-i
 import { GrowthInProcurmentTabComponent } from './component/DHS-Components/growth-in-procurment-tab/growth-in-procurment-tab.component';
 import { DirectorateAIDetailsComponent } from './component/DHS-Components/directorate-aidetails/directorate-aidetails.component';
 import { DistributionTabComponent } from './component/DHS-Components/distribution-tab/distribution-tab.component';
+import { DropAppWarehousePerformanceComponent } from './component/warehouse/drop-app-warehouse-performance/drop-app-warehouse-performance.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -159,8 +160,9 @@ const routes: Routes = [
 {path:'HODYearWiseIssuance',component:HODYearWiseIssuanceComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['Collector']} },
 // {path:'GrowthInProcurment',component:GrowthInProcurmentComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 {path:'GrowthInProcurment',component:GrowthInProcurmentTabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
-{path:'distribution',component:DistributionTabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
 // {path:'DirectorateAIDetails',component:DirectorateAIDetailsComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'distribution',component:DistributionTabComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['DHS']} },
+{path:'DropAppWarehousePerformance',component:DropAppWarehousePerformanceComponent,canActivate:[RouteGuardService],data: { allowedRoles: ['SEC1']} },
 
 
 

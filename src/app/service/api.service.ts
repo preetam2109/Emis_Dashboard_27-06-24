@@ -73,6 +73,7 @@ import { DirectorateAIDetails } from '../Model/DirectorateAIDetails';
 import { GroupWiseAI_PODetails } from '../Model/GroupWiseAI_PODetails';
 import { Monthwise_Issuance } from '../Model/GroupItemtypeRCStock';
 import { Diswise_Issuance } from '../Model/Diswise_Issuance';
+import { DropAppWarehousePerformance } from '../Model/DropAppWarehousePerformance';
 
 
 @Injectable({
@@ -529,6 +530,13 @@ Diswise_Issuance(yearid:any,mcid:any,hodid:any): Observable<any> {
 Monthwise_Issuance(yearid:any,mcid:any,hodid:any): Observable<any> {
   
   return this.http.get<Monthwise_Issuance[]>(`https://dpdmis.in/CGMSCHO_API2/api/HOD/Monthwise_Issuance?yearid=${yearid}&mcid=${mcid}&hodid=${hodid}`);
+
+}
+
+
+getDropAppWarehousePerformance(fromdt:any,todate:any): Observable<any> {
+  // 01-Nov-2024
+  return this.http.get<DropAppWarehousePerformance[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/DropAppWarehousePerformance?fromdt=${fromdt}&todate=${todate}`);
 
 }
 

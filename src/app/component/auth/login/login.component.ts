@@ -10,6 +10,10 @@ import { BasicAuthenticationService } from 'src/app/service/authentication/basic
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+warehouseId: any;
+handleWarehouseLogin() {
+throw new Error('Method not implemented.');
+}
   username:any;
   emailid: any;
   pwd : any;

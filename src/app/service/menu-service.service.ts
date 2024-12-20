@@ -39,6 +39,8 @@ export class MenuServiceService {
           { label: 'NOC', route: 'noc' },
           { label: 'Vehicle Tracking', route: 'vehicleTracking' },
           { label: 'DHS Seasonal Drugs', route: 'SeasonDrugs' },
+          { label: 'DropApp Warehouse Performance', route: 'DropAppWarehousePerformance' },
+
 
           // { label: 'In-Transit Issues', route: 'intransitIssues' },
         ],
@@ -74,7 +76,7 @@ export class MenuServiceService {
           { label: 'DHS Supplied %', route: 'IssuedPerWise' },
           { label: 'DHS Stock Availablity %', route: 'StockSummaryBalanceIndent' },
           { label: 'WH Indent Pending', route: 'IndentPendingWHdash' },
-          { label: 'StockoutSummary', route: 'StockoutSummary' },
+          { label: 'Warehouse Stock-out %', route: 'StockoutSummary' },
 
           { label: 'Near Expiry', route: 'nearExpiry' },
           { label: 'NOC', route: 'noc' },
