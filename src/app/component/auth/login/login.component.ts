@@ -11,6 +11,7 @@ import { BasicAuthenticationService } from 'src/app/service/authentication/basic
 })
 export class LoginComponent {
 warehouseId: any;
+warehousePwd: any;
 handleWarehouseLogin() {
 throw new Error('Method not implemented.');
 }
@@ -21,6 +22,8 @@ throw new Error('Method not implemented.');
   email:any
   errorMessage="Invalid Credential";
   invalidLogin=false;
+  showFullText = false;
+
   
   constructor(public loginService:BasicAuthenticationService,private toastr: ToastrService,private router:Router,public  hardcodedAuthenticationService:HardcodedAuthenticationService){
 
@@ -52,6 +55,10 @@ throw new Error('Method not implemented.');
   }
 
   );
+}
+
+toggleText() {
+  this.showFullText = !this.showFullText; // Toggle the visibility of full text
 }
 }
   

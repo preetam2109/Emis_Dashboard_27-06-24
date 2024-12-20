@@ -1,19 +1,113 @@
-.login-card {
-  max-width: 400px;
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+.district-login-header {
+  /* position: fixed; */
+  top: 50;
+  left: 3;
+  right: 2;
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  z-index: 9999;
+}
+
+
+
+
+
+
+
+
+@keyframes scroll-vertical {
+0% {
+    transform: translateY(100%);
+}
+100% {
+    transform: translateY(-100%);
+}
+}
+
+
+
+
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0056b3;
+}
+header .header-logo {
+  height: auto !important;
+  max-height: 100px !important;
+  width: auto !important;
+  max-width: 150px !important;
+  object-fit: contain !important;
+}
+
+
+header img {
+  max-width: 50px;
+}
+
+header h1 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+header h6 {
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+main {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2rem;
+}
+
+.shadow-lg {
+  background: #ffffff;
+}
+
+form {
   width: 100%;
-  border-radius: 8px;
 }
 
-.profile-photo img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: #3f51b5;
+/* button {
+  background: #0056b3;
+  border: none;
+  color: white;
+} */
+
+footer {
+  background-color: #343a40;
+  text-align: center;
 }
 
-@media (max-width: 768px) {
-  .login-card {
-    margin: 0 10px;
+footer p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+
+
+@media (max-width: 576px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
   }
+
+  .header-logo {
+    max-height: 80px;
+  }
+
 }
+

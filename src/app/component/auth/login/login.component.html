@@ -1,69 +1,267 @@
-<div class="container-fluid d-flex flex-column vh-100">
-  <!-- Header -->
-  <header class="bg-success text-white py-3">
-    <div class="container text-center">
-      <h1>Application Name</h1>
-    </div>
-  </header>
+<div class="container-fluid vh-100 d-flex flex-column"
+    style="background-image: url('assets/images/login-background.png'); background-size: cover; background-position: center;">
 
-  <!-- Main Content -->
-  <div class="container d-flex justify-content-end align-items-center flex-grow-1">
-    <div class="card shadow login-card">
-      <div class="card-header bg-success text-white">
-        <ul class="nav nav-tabs card-header-tabs" id="loginTabs" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">
-              Login
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="warehouse-tab" data-bs-toggle="tab" data-bs-target="#warehouse" type="button" role="tab" aria-controls="warehouse" aria-selected="false">
-              Warehouse
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div class="card-body tab-content" id="loginTabsContent">
-        <!-- Login Tab -->
-        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-          <div class="profile-photo mb-4 text-center">
-            <img src="https://govthealth.cg.gov.in/health_dashboard/assets/images/user.jpg" alt="Profile Photo">
+    <!-- Header -->
+    <header class="header text-white py-3 bg-success" style="border: 2px solid;">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center">
+          <!-- Left Logo -->
+          <div class="header-logo-container d-flex justify-content-center justify-content-md-start flex-shrink-0">
+              <img src="https://seeklogo.com/images/C/chhattisgarh-govt-logo-CDE4C0558C-seeklogo.com.png" alt="Left Logo"
+                  class="header-logo img-fluid" style="max-height: 60px;">
           </div>
-          <form (ngSubmit)="handleLogin()">
-            <div class="mb-3">
-              <label for="emailid" class="form-label">User ID</label>
-              <input type="text" class="form-control" id="emailid" name="emailid" [(ngModel)]="emailid" required>
+  
+          <!-- Title Section -->
+          <div class="header-title text-center flex-grow-1 mx-md-3 my-2 my-md-0">
+              <h1 class="cgmsctitle text-white fs-5 fw-bold mb-1">छत्तीसगढ़ औषधि दर्पण</h1>
+              <p class="collector-title text-white fs-6 fw-bold mb-1">
+                  Dashboard for Drug Procurement Distribution Management Information System
+              </p>
+              <p class="sub-title text-white small m-0">
+                  An Initiative By CGMSC For Strengthening of Drugs Supply Chain and Infrastructure
+              </p>
+          </div>
+  
+          <!-- Right Logo -->
+          <div class="header-logo-container d-flex justify-content-center justify-content-md-end flex-shrink-0">
+              <img src="assets/images/cgmsc-logo.png" alt="Right Logo" class="header-logo img-fluid" style="max-height: 60px;">
+          </div>
+      </div>
+  </header>
+  
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <!-- Left Section - Tabs and Card -->
+        <div class="col-lg-4 col-md-12 col-12 p-3">
+          <div class="d-flex flex-column">
+            <!-- Tabs Section -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tutorials-tab" data-bs-toggle="tab" href="#tutorials" role="tab" aria-controls="tutorials" aria-selected="false">Orders/Circulars</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="manuals-tab" data-bs-toggle="tab" href="#manuals" role="tab" aria-controls="manuals" aria-selected="false">User Manuals</a>
+              </li>
+            </ul>
+            <div class="tab-content mt-3">
+              <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <div class="card">
+                  <div class="card-header bg-success text-white">
+                    <strong>About</strong>
+                  </div>
+                  <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet...
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo recusandae obcaecati eius dolores molestiae maiores cupiditate mollitia asperiores, quia delectus minima magni. Enim harum iste maiores quam, quasi aut voluptatum!
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus autem est sed qui quas consequuntur accusamus laboriosam ad deserunt vel totam, illum, libero sit repellat mollitia, non impedit dignissimos quam.
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo incidunt vel aliquam possimus, explicabo dignissimos officia neque rerum dicta quod eveniet quibusdam quasi aliquid quos dolor dolores delectus voluptas recusandae!
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente, vitae itaque. Distinctio enim, eius pariatur animi, nemo ea suscipit soluta doloremque libero, ipsam vero vel incidunt dolores non rerum error?
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime facilis dignissimos inventore est voluptate? Harum enim recusandae reiciendis possimus, quis delectus molestias accusamus fuga ipsa dicta nihil iusto distinctio blanditiis!
+                    </p>
+
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="pwd" class="form-label">Password</label>
-              <input type="password" class="form-control" id="pwd" name="pwd" [(ngModel)]="pwd" required>
+    
+            <!-- Additional Card Below Tabs -->
+            <div class="mt-3">
+              <div class="card">
+                <div class="card-header bg-success text-white">
+                  <strong>Current Stock Report</strong>
+                </div>
+                <div class="card-body">
+                  <!-- Radio Buttons and Select Dropdown -->
+                  <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="optionRadio" id="option1" value="1">
+                      <label class="form-check-label" for="option1">Drugs</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="optionRadio" id="option2" value="2">
+                      <label class="form-check-label" for="option2">Consumables</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="optionRadio" id="option3" value="3">
+                      <label class="form-check-label" for="option3">Ayush</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="optionRadio" id="option4" value="4">
+                      <label class="form-check-label" for="option4">Reagent</label>
+                    </div>
+                  </div>
+    
+                  <div class="mb-3">
+                    <label for="selectDropdown" class="form-label">Select Category</label>
+                    <select class="form-select" id="selectDropdown">
+                      <option selected>Select an option</option>
+                      <option value="1">Category 1</option>
+                      <option value="2">Category 2</option>
+                      <option value="3">Category 3</option>
+                    </select>
+                  </div>
+    
+                  <!-- Table -->
+                  <div class="table-responsive mt-3">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Item Name</th>
+                          <th>Item Code</th>
+                          <th>Stock</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Item 1</td>
+                          <td>12345</td>
+                          <td>50</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Item 2</td>
+                          <td>67890</td>
+                          <td>100</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Item 3</td>
+                          <td>11223</td>
+                          <td>25</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button type="submit" class="btn btn-success w-100">Login</button>
-          </form>
+          </div>
         </div>
 
-        <!-- Warehouse Tab -->
-        <div class="tab-pane fade" id="warehouse" role="tabpanel" aria-labelledby="warehouse-tab">
-          <form (ngSubmit)="handleWarehouseLogin()">
-            <div class="mb-3">
-              <label for="warehouseId" class="form-label">Warehouse ID</label>
-              <input type="text" class="form-control" id="warehouseId" name="warehouseId" [(ngModel)]="warehouseId" required>
+
+
+    <!-- Vertical Marquee Section -->
+    <!-- Card to hold the Marquee -->
+    <div class="col-lg-4 col-md-12 col-12 p-3">
+      <div class="card" style="width: 100%;">
+        <div class="card-header bg-success text-white">
+          <strong>Important Notice</strong>
+        </div>
+        <div class="card-body">
+          <div class="marquee-container">
+            <div class="marquee">
+              <p>Important Information: System Maintenance Tonight from 11:00 PM to 2:00 AM.</p>
+              <p>Important Information: System Maintenance Tonight from 11:00 PM to 2:00 AM.</p>
+              <p>Important Information: System Maintenance Tonight from 11:00 PM to 2:00 AM.</p>
+              <p>Important Information: System Maintenance Tonight from 11:00 PM to 2:00 AM.</p>
+              <p>Important Information: System Maintenance Tonight from 11:00 PM to 2:00 AM.</p>
+              <p>Important Information: System Maintenance Tonight from 11:00 PM to 2:00 AM.</p>
+              <p>Important Information: System Maintenance Tonight from 11:00 PM to 2:00 AM.</p>
             </div>
-            <div class="mb-3">
-              <label for="warehousePwd" class="form-label">Password</label>
-              <input type="password" class="form-control" id="warehousePwd" name="warehousePwd" [(ngModel)]="warehouseId" required>
-            </div>
-            <button type="submit" class="btn btn-success w-100">Login to Warehouse</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-3">
-    <div class="container text-center">
-      <p class="mb-0">&copy; 2024 Application Name. All Rights Reserved.</p>
+    
+        <!-- Right Section - Login Card -->
+        <div class="col-lg-4 col-md-12 col-12 p-3">
+          <div class="d-flex justify-content-end align-items-center">
+            <div class="card shadow login-card w-100 ">
+              <div class="card-header text-white">
+                <ul class="nav nav-tabs card-header-tabs" id="loginTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="warehouse-tab" data-bs-toggle="tab" data-bs-target="#warehouse" type="button" role="tab" aria-controls="warehouse" aria-selected="false">Warehouse</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body tab-content" id="loginTabsContent">
+                <!-- Login Tab -->
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                  <form (ngSubmit)="handleLogin()">
+                    <div class="mb-3">
+                      <label for="emailid" class="form-label">User ID</label>
+                      <input type="text" class="form-control" id="emailid" name="emailid" [(ngModel)]="emailid" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="pwd" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="pwd" name="pwd" [(ngModel)]="pwd" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Login</button>
+                  </form>
+                </div>
+                <!-- Warehouse Tab -->
+                <div class="tab-pane fade" id="warehouse" role="tabpanel" aria-labelledby="warehouse-tab">
+                  <form (ngSubmit)="handleWarehouseLogin()">
+                    <div class="mb-3">
+                      <label for="warehouseId" class="form-label">Warehouse ID</label>
+                      <input type="text" class="form-control" id="warehouseId" name="warehouseId" [(ngModel)]="warehouseId" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="warehousePwd" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="warehousePwd" name="warehousePwd" [(ngModel)]="warehousePwd" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Login to Warehouse</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
-</div>
+    
+
+    <!-- Footer -->
+    <div class="d-flex flex-column ">
+      <!-- Main Content Area -->
+      <div class="container-fluid flex-grow-1">
+          <!-- Your Page Content Here (Tabs, Cards, etc.) -->
+      </div>
+  
+      <!-- Footer -->
+      <footer class="bg-success text-white py-2 mt-auto fixed-bottom">
+          <div class="container text-center">
+              <p class="mb-0 small">Designed & Developed by IT-Cell CGMSCL | © 2024</p>
+          </div>
+      </footer>
+  </div>
+  
+  <style>
+    .marquee-container {
+      position: relative;
+      height: 200px; /* Adjust the height of the card content */
+      width: 90%; /* Adjust the width of the marquee container (reduce the width) */
+      margin: 0 auto; /* Center the marquee container */
+      overflow: hidden;
+    }
+  
+    .marquee {
+      position: absolute;
+      top: 100%;
+      animation: scrollUp 15s linear infinite;
+    }
+  
+    .marquee p {
+      margin: 0;
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+  
+    @keyframes scrollUp {
+      0% {
+        top: 100%;
+      }
+      100% {
+        top: -100%;
+      }
+    }
+  </style>
