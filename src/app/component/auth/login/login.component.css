@@ -32,7 +32,9 @@ body, html {
 }
 }
 
-
+.marquee-container:hover .marquee {
+  animation-play-state: paused;
+}
 
 
 
@@ -111,3 +113,18 @@ footer p {
 
 }
 
+.captcha-box {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.Active {
+  background-color: #4f07f7; /* Example for active button */
+  color: white;
+}

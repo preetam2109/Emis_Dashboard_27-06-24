@@ -253,73 +253,63 @@ export class PaidTimeTakenComponent {
   //   }
   // }
 
-  loadData(mcid:any,hodid:any,QCRequired:any,hodname:string): void {
-    
-this.hodname=hodname;
-    this.QCRequired=QCRequired
-    
-      this.updateSelectedHodid()
-    
-    
+  loadData(mcid: any, hodid: any, QCRequired: any, hodname: string): void {
+    debugger;
+    this.hodname = hodname;
+    this.QCRequired = QCRequired;
+  
+    this.updateSelectedHodid();
+  
     this.spinner.show();
-    this.api.getPaidTimeTaken(mcid,hodid,this.QCRequired).subscribe(
-      (data:any) => {
+    debugger;
+    this.api.getPaidTimeTaken(mcid, hodid, this.QCRequired).subscribe(
+      (data: any) => {
         const yr: string[] = [];
         const avgdayssincerec: number[] = [];
-        const avgdayssinceqc: number[] = [];
+        const avgdayssinceQC: number[] = [];
         console.log('API Response:', data);
-
-
-        data.forEach((item:any)=> {
-           
+  
+        data.forEach((item: any) => {
           yr.push(item.yr);
           avgdayssincerec.push(item.avgdayssincerec);
-          avgdayssinceqc.push(item.avgdayssinceqc);
-         
-
-          // console.log('yr:', item.yr, 'delayparA1:', item.delayparA1);
-          // if (item.delaypara && item.delayparA1) {
-          //   this.whidMap[item.delaypara] = item.delayparA1;
-          // } else {
-          //   console.warn('Missing whid for delayparaA1 :', item.delayparaA1);
-          // }
-
-          
+          avgdayssinceQC.push(item.avgdayssinceQC);
         });
-
-
-        this.chartOptions.series = [
-
-           
-          { 
-            name: 'Since QC Passed ', 
-            data: avgdayssinceqc,
-             color:'#006400'
-          },
-          { 
-            name: 'Since Received in Warehouse',
-            data: avgdayssincerec ,
-            color:'#fb8500'
-
-          }
-
-
-          
-        ];
-
+  
+        // Conditional logic for series
+        const series = [];
+  
+        if (QCRequired === 'Y') {
+          series.push({
+            name: 'Since QC Passed',
+            data: avgdayssinceQC,
+            color: '#006400',
+            show: false, // Hide bars but show legend
+            dataLabels: {
+              enabled: false, // Ensure no data labels appear
+            },
+          });
+        }
+  
+        series.push({
+          name: 'Since Received in Warehouse',
+          data: avgdayssincerec,
+          color: '#fb8500',
+        });
+  
+        // Assign the series and x-axis categories
+        this.chartOptions.series = series;
         this.chartOptions.xaxis = {
           categories: yr,
-          labels:{
-            style:{
+          labels: {
+            style: {
               // colors:'#390099',
-              fontWeight:'bold',
-              fontSize:'15px'
-            }
-          }
-          
-
-          
-         };
+              fontWeight: 'bold',
+              fontSize: '15px',
+            },
+          },
+        };
+  
+        // Trigger change detection and hide spinner
         this.cO = this.chartOptions;
         this.cdr.detectChanges();
         this.spinner.hide();
@@ -330,6 +320,7 @@ this.hodname=hodname;
       }
     );
   }
+  
 
   loadDataDHS(mcid:any,hodid:any,QCRequired:any): void {
     

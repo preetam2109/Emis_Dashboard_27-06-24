@@ -73,11 +73,13 @@ import { GrowthInProcurmentTabComponent } from './component/DHS-Components/growt
 import { DirectorateAIDetailsComponent } from './component/DHS-Components/directorate-aidetails/directorate-aidetails.component';
 import { DistributionTabComponent } from './component/DHS-Components/distribution-tab/distribution-tab.component';
 import { DropAppWarehousePerformanceComponent } from './component/warehouse/drop-app-warehouse-performance/drop-app-warehouse-performance.component';
+import { OtpComponent } from './component/auth/otp/otp.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
   {path:'collector-login',component:CollectorLoginComponent},
+  {path:'otp',component:OtpComponent},
 
   {path:'logout',component:LogoutComponent,canActivate:[RouteGuardService]},
   { path: 'home',component: CategorySelectionComponent,canActivate:[RouteGuardService]}, 

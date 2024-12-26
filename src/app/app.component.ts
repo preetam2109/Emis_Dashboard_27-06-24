@@ -90,7 +90,7 @@ debugger
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isLoginPage = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/collector-login');
+        this.isLoginPage = (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/otp' || event.urlAfterRedirects === '/collector-login');
 
         this.role = this.basicAuthentication.getRole().roleName; // Fetch dynamic role from the authentication service
         this.updateMenu();

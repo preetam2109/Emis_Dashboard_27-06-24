@@ -74,6 +74,9 @@ import { GroupWiseAI_PODetails } from '../Model/GroupWiseAI_PODetails';
 import { Monthwise_Issuance } from '../Model/GroupItemtypeRCStock';
 import { Diswise_Issuance } from '../Model/Diswise_Issuance';
 import { DropAppWarehousePerformance } from '../Model/DropAppWarehousePerformance';
+import { DelvieryDash } from '../Model/DelvieryDash';
+import { masddlUser } from '../Model/masddlUser';
+import { MasWH } from '../Model/MasWH';
 
 
 @Injectable({
@@ -538,6 +541,31 @@ getDropAppWarehousePerformance(fromdt:any,todate:any): Observable<any> {
   // 01-Nov-2024
   return this.http.get<DropAppWarehousePerformance[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/DropAppWarehousePerformance?fromdt=${fromdt}&todate=${todate}`);
 
+}
+
+DelvieryDash(days:any): Observable<any> {
+  return this.http.get<DelvieryDash[]>(`https://dpdmis.in/CGMSCHO_API2/api/TimeTaken/DelvieryDash?days=${days}`);
+
+}
+
+masddlUser(Usertype:any): Observable<any> {
+  
+  return this.http.get<masddlUser[]>(`https://dpdmis.in/CGMSCHO_API2/api/Master/masddlUser?Usertype=${Usertype}`);
+
+}
+
+allwh(allwh:any): Observable<any> {
+  debugger
+  return this.http.get<MasWH[]>(`https://dpdmis.in/CGMSCHO_API2/api/Master/MasWH?allwh=${allwh}`);
+
+}
+VerifyOTPLogin(otp:any,userid:any){
+    
+  return this.http.get(`https://dpdmis.in//AamApi/api/Login/VerifyOTPLogin?otp=${otp}&userid=${userid}`,{ responseType: 'text' });
+}
+getOTPSaved(userid:any){
+  debugger
+  return this.http.post(`https://dpdmis.in//AamApi/api/Login/getOTPSaved?userid=${userid}`,{ responseType: 'text' });
 }
 
 

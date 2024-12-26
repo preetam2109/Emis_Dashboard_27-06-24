@@ -7,7 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { InputComponent } from './input/input.component';
 import { MaterialModule } from './material-module';
 // import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 import { MenubarComponent } from './component/menubar/menubar.component';
 import { HomeComponent } from './component/home/home.component';
 import { CardComponent } from './component/card/card.component';
@@ -86,6 +87,7 @@ import { VehicleTrackingComponent } from './component/vehicle-tracking/vehicle-t
 import { InTransitIssuesComponent } from './component/warehouse/in-transit-issues/in-transit-issues.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 
@@ -160,7 +162,7 @@ import { CommonModule } from '@angular/common';
     ],
     bootstrap: [AppComponent], imports: [
       NgSelectModule,
-        FormsModule,
+        // FormsModule,
         CommonModule,
         DatePipe,
         FontAwesomeModule,
@@ -175,6 +177,7 @@ import { CommonModule } from '@angular/common';
         NgApexchartsModule,
         MatDialogModule,
         MatTableModule,
+        GoogleMapsModule,
         MatTableExporterModule,
         ToastrModule.forRoot({
             positionClass: 'toast-top-right' // Set the position to top right
